@@ -1,5 +1,7 @@
 if [ "$(uname)" = "Darwin" ]; then
-  source ~/.bash/itunes_completion.sh
+  if [ -e $HOME/.bash/itunes_completion.sh ]; then
+    source $HOME/.bash/itunes_completion.sh
+  fi
   eval "$(rbenv init -)"
 fi
 
