@@ -51,6 +51,7 @@ filetype plugin indent on
 syntax on
 
 " colorschemeの設定前に書くこと
+" line番号の色を設定
 " ~/show256colors.plで色に対応する番号がわかる
 " perl show256colors.pl で実行
 autocmd ColorScheme * highlight LineNr ctermfg=153
