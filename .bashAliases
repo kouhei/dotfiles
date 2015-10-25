@@ -1,0 +1,13 @@
+alias ls='ls -G'
+alias ll='ls -alF'
+alias la='ls -a'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias grep='grep --color=auto'
+alias f='open .'
+
+alias memo='/Users/kohei/shellscripts/geekToolMemo.sh'
+alias lighton='w3m http://192.168.11.10:8080/on'
+alias lightoff='w3m http://192.168.11.10:8080/off'
+echo 'hello,world .bashAliases is sourced'
