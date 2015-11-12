@@ -1,8 +1,3 @@
-
-#python
-#export WORKON_HOME=~/.virtualenvs
-#. /usr/local/bin/virtualenvwrapper.sh
-
 export PATH="/usr/local/sbin:$PATH"
 
 export PATH=$PATH:/opt/local/bin
@@ -15,8 +10,10 @@ if [ "$(uname)" = 'Darwin' ]; then
   PATH=/Users/kohei/.nodebrew/current/bin:$PATH
   GREP_OPTIONS="--color=always";export GREP_OPTIONS
   export PATH=$PATH:/Users/kohei/android-sdk-macosx/platform-tools/adb
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
 else
-  echo "this is not mac."
   if [ "$(uname)" = 'Linux' ]; then
     echo "this is Linux."
   fi
