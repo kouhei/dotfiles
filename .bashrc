@@ -5,12 +5,20 @@ if [ "$(uname)" = "Darwin" ]; then
   eval "$(rbenv init -)"
 fi
 
-if [ -f ~/.bashAliases  ]; then
-  . ~/.bashAliases
+bashAliases=$HOME/.bashAliases
+bash_aliases=$HOME/.bash_aliases
+if [ -e $bashAliases ]; then
+  . $bashAliases
+elif [ -L $bashAliases ];then
+  . $bashAliases
 fi
 
-if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
+if [ -e $bash_aliases ]; then
+  echo "bash_aliases exist"
+  . $bash_aliases
+elif [ -L $bash_aliases ];then
+  echo "bash_aliases ln"
+  . $bash_aliases
 fi
 function cl(){
   cd $1;
