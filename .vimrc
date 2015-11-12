@@ -50,6 +50,8 @@ filetype plugin indent on
 "ここから自分の設定
 syntax on
 
+syntax enable
+
 " colorschemeの設定前に書くこと
 " line番号の色を設定
 " ~/show256colors.plで色に対応する番号がわかる
@@ -60,7 +62,7 @@ set background=dark
 "colorscheme molokai
 "let g:molokai_original = 1
 "let g:rehash256 = 1
-colorscheme hybrid
+"colorscheme hybrid
 "colorscheme darkblue
 "colorscheme elflord
 "colorscheme desert "good
@@ -69,6 +71,8 @@ colorscheme hybrid
 "colorscheme evening
 "colorscheme slate
 "colorscheme torte
+colorscheme solarized
+let g:solarized_termcolors=256
 set showcmd
 set ignorecase
 set smartcase
