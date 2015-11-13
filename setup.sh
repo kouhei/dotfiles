@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOT_FILES=(.vimrc .bashrc .bashAliases .bash_profile .bash)
+DOT_FILES=(.vimrc .bashrc .bashAliases .bash_profile .bash .zshrc)
 for file in ${DOT_FILES[@]}
 do
   if [ -e $HOME/$file ]; then
