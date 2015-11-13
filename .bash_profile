@@ -1,5 +1,5 @@
 export PATH="/usr/local/sbin:$PATH"
-
+export PATH="$HOME/bin:/usr/local/bin:$PATH"
 export PATH=$PATH:/opt/local/bin
 if [ -f /usr/local/lib/node_modules  ]; then
   export NODE_PATH=/usr/local/lib/node_modules
