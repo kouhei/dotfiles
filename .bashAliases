@@ -12,4 +12,5 @@ alias lighton='curl http://192.168.11.10:8080/on;echo'
 alias lightoff='curl http://192.168.11.10:8080/off;echo'
 alias doorsleep='curl http://192.168.11.10:8080/sleep;echo'
 alias doorwakeup='curl http://192.168.11.10:8080/wakeup;echo'
+
 echo 'hello,world .bashAliases is sourced'

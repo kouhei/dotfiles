@@ -5,8 +5,7 @@ export ZSH=/Users/kohei/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="random"
-#ZSH_THEME="robbyrussell"
+#ZSH_THEME="random"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -54,7 +53,6 @@ plugins=(git ruby osx bundler brew rails emoji-clock)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -85,12 +83,29 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #my settings
-alias lightoff="curl http://192.168.11.10:8080/off"
-alias lighton="curl http://192.168.11.10:8080/on"
-alias doorsleep="curl http://192.168.11.10:8080/sleep"
-alias doorwakeup="curl http://192.168.11.10:8080/wakeup"
-alias f="open -a Finder ./"
+autoload -U compinit
+compinit
 
-export PATH=$PATH:~/Library/Python/2.7/bin
-powerline-daemon -q
-. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+if [ "$(uname)" = 'Darwin' ];then
+  if [ -e $HOME/.bash/itunes_completion.sh ];then
+    source $HOME/.bash/itunes_completion.sh
+  fi
+  alias f="open -a Finder ./"
+  eval "$(rbenv init -)"
+  powerline-daemon -q
+  source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
+
+if [ -e $HOME/.bashAliases ];then
+  source $HOME/.bashAliases
+elif [ -L $HOME/.bashAliases ];then
+  source $HOME/.bashAliases
+fi
+
+if [ -e $HOME/.bash_aliases ];then
+  source $HOME/.bash_aliases
+elif [ -L $HOME/.bash_aliases ];then
+  source $HOME/.bash_aliases
+fi
+
+echo "zshrc"

@@ -3,7 +3,6 @@ if [ "$(uname)" = "Darwin" ]; then
     source $HOME/.bash/itunes_completion.sh
   fi
   eval "$(rbenv init -)"
-  export PATH=$PATH:~/Library/Python/2.7/bin
   powerline-daemon -q
   . ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
 fi
@@ -23,15 +22,3 @@ elif [ -L $bash_aliases ];then
   echo "bash_aliases ln"
   . $bash_aliases
 fi
-function cl(){
-  cd $1;
-  ls;
-}
-function cla(){
-  cd $1;
-  ls -alF;
-}
-function mkdirls(){
-  mkdir $1;
-  cd $1;
-}
