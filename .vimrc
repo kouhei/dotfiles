@@ -39,10 +39,30 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-"NeoBundle 'powerline/powerline'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'vim-scripts/Align'
-NeoBundle 'vim-scripts/YankRing.vim'
+
+"ここからjs用
+NeoBundle 'marijnh/tern_for_vim'
+"いい感じのjsのインデントとシンタックスカラー
+NeoBundle 'pangloss/vim-javascript'
+
+"ctrl+oで補完
+" complete
+NeoBundle 'myhere/vim-nodejs-complete'
+autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
+if !exists('g:neocomplcache_omni_functions')
+  let g:neocomplcache_omni_functions = {}
+endif
+let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
+
+let g:node_usejscomplete = 1
+
+" 水平に分割する
+let g:quickrun_config={'*': {'split': ''}}
+
+"jsここまで
+
+"ファイルツリー
+NeoBundle 'scrooloose/nerdtree'
 
 NeoBundle "thinca/vim-template"
 " テンプレート中に含まれる特定文字列を置き換える
@@ -57,43 +77,68 @@ autocmd MyAutoCmd User plugin-template-loaded
     \ |   silent! execute 'normal! "_da>'
     \ | endif
 
-
+"gitてきなやつ
 NeoBundleLazy "sjl/gundo.vim", {
       \ "autoload": {
       \   "commands": ['GundoToggle'],
       \}}
 nnoremap <Leader>g :GundoToggle<CR>
 
+"t1,t2....などでタブ移動
+"参考:http://qiita.com/wadako111/items/755e753677dd72d8036d
+" Anywhere SID.
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
 
-NeoBundleLazy "vim-scripts/TaskList.vim", {
-      \ "autoload": {
-      \   "mappings": ['<Plug>TaskList'],
-      \}}
-nmap <Leader>T <plug>TaskList
+" Set tabline.
+function! s:my_tabline()  "{{{
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let no = i  " display 0-origin tabpagenr.
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = '[' . title . ']'
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+set showtabline=2 " 常にタブラインを表示
 
+" The prefix key.
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+" Tab jump
+for n in range(1, 9)
+  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
 
-NeoBundleLazy 'majutsushi/tagbar', {
-      \ "autload": {
-      \   "commands": ["TagbarToggle"],
-      \ },
-      \ "build": {
-      \   "mac": "brew install ctags",
-      \ }}
-nmap <Leader>t :TagbarToggle<CR>
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+" tc 新しいタブを一番右に作る
+map <silent> [Tag]x :tabclose<CR>
+" tx タブを閉じる
+map <silent> [Tag]n :tabnext<CR>
+" tn 次のタブ
+map <silent> [Tag]p :tabprevious<CR>
+" tp 前のタブ
 
 
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on
 
-
-
-
 "my settings
 syntax on
-
 syntax enable
-
 " colorschemeの設定前に書くこと
 " line番号の色を設定
 " ~/show256colors.plで色に対応する番号がわかる
@@ -134,6 +179,9 @@ set matchtime=3
 
 set paste
 
+"ctrl+eでファイルツリー表示
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
 " Powerline
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
@@ -154,7 +202,7 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
 set shiftround
 set infercase           " 補完時に大文字小文字を区別しない
-set virtualedit=all     " カーソルを文字が存在しない部分でも動けるようにする
+"set virtualedit=all     " カーソルを文字が存在しない部分でも動けるようにする
 set switchbuf=useopen
 " 対応括弧に'<'と'>'のペアを追加
 set matchpairs& matchpairs+=<:>
@@ -162,13 +210,13 @@ set matchpairs& matchpairs+=<:>
 set backspace=indent,eol,start
 " クリップボードをデフォルトのレジスタとして指定。後にYankRingを使うので
 " 'unnamedplus'が存在しているかどうかで設定を分ける必要がある
-if has('unnamedplus')
+"if has('unnamedplus')
     " set clipboard& clipboard+=unnamedplus " 2013-07-03 14:30 unnamed 追加
-    set clipboard& clipboard+=unnamedplus,unnamed 
-else
+    "set clipboard& clipboard+=unnamedplus,unnamed
+"else
     " set clipboard& clipboard+=unnamed,autoselect 2013-06-24 10:00 autoselect 削除
-    set clipboard& clipboard+=unnamed
-endif
+   "set clipboard& clipboard+=autoselect,unnamed
+"endif
 
 set nowritebackup
 set nobackup
@@ -213,20 +261,6 @@ vnoremap <Tab> %
 
 " w!! でスーパーユーザーとして保存（sudoが使える環境限定）
 cmap w!! w !sudo tee > /dev/null %
-
-" vim 起動時のみカレントディレクトリを開いたファイルの親ディレクトリに指定
-autocmd MyAutoCmd VimEnter * call s:ChangeCurrentDir('', '')
-function! s:ChangeCurrentDir(directory, bang)
-    if a:directory == ''
-        lcd %:p:h
-    else
-        execute 'lcd' . a:directory
-    endif
-
-    if a:bang == ''
-        pwd
-    endif
-endfunction
 
 " ~/.vimrc.localが存在する場合のみ設定を読み込む
 let s:local_vimrc = expand('~/.vimrc.local')
