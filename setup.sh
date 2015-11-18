@@ -7,7 +7,7 @@ do
     echo "既に存在します: $file"
     cp -r $file $HOME/dotfile$file 
   elif [ -n $HOME/$file ]; then
-    echo "シンボリックリンクです"
+    echo "既に存在します(シンボリックリンクです)"
     cp -r $file $HOME/dotfile$file
   else
     ln -s $file $HOME/$file
