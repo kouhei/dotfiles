@@ -5,8 +5,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias grep='grep --color=auto'
-
-if [ "$(uname)" = "Darwin" ];then
+UNAME="$(uname)"
+if [ $UNAME = 'Darwin' ];then
 	alias f='open .'
 	alias memo='/Users/kohei/shellscripts/geekToolMemo.sh'
 	alias vim='reattach-to-user-namespace vim'
@@ -18,4 +18,7 @@ alias lightoff='curl http://192.168.11.10:8080/off;echo'
 alias doorsleep='curl http://192.168.11.10:8080/sleep;echo'
 alias doorwakeup='curl http://192.168.11.10:8080/wakeup;echo'
 
+if [ $UNAME = 'Linux' ];then
+  alias diff='vim -d'
+fi
 echo 'hello,world .bashAliases is sourced'
