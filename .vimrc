@@ -29,7 +29,7 @@ if !filereadable(neobundle_readme)
   let g:not_finsh_neobundle = "yes"
 
   " Run shell script if exist on custom select language
-    
+  
 endif
 
 " Required:
@@ -41,7 +41,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 
 "ここからjs用
-NeoBundle 'marijnh/tern_for_vim'
+"NeoBundle 'marijnh/tern_for_vim'
 "いい感じのjsのインデントとシンタックスカラー
 NeoBundle 'pangloss/vim-javascript'
 
@@ -132,6 +132,30 @@ map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
 
+" インデントに色を付けて見やすくする
+NeoBundle 'nathanaelkane/vim-indent-guides'
+" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup = 1
+
+
+"補完
+NeoBundle 'Shougo/neocomplcache'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on
@@ -152,6 +176,8 @@ set background=dark
 "colorscheme hybrid
 colorscheme solarized
 let g:solarized_termcolors=256
+"カーソルのある行をハイライト
+set cursorline
 set showcmd
 set ignorecase
 set smartcase
@@ -177,6 +203,10 @@ set pumheight=10
 set showmatch
 set matchtime=3
 
+"http://qiita.com/inodev/items/4f4d5412e65c2564b273
+"インサートモードでjjをおすとEsc押したのと同じになる
+"inoremap <silent> jj <ESC>
+
 set paste
 
 "ctrl+eでファイルツリー表示
@@ -191,7 +221,7 @@ set showtabline=2
 set noshowmode
 
 
-"set clipboard=unnamed
+set clipboard=unnamed,autoselect
 
 
 "http://lambdalisue.hatenablog.com/entry/2013/06/23/071344参考
@@ -237,6 +267,11 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 "キー設定"
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+"全角スペースを可視化
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
+au BufNewFile,BufRead * match ZenkakuSpace /　/
+
 " カーソル下の単語を * で検索
 vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
 

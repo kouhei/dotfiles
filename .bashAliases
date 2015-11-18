@@ -5,15 +5,17 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias grep='grep --color=auto'
-alias f='open .'
 
-alias memo='/Users/kohei/shellscripts/geekToolMemo.sh'
+if [ "$(uname)" = "Darwin" ];then
+	alias f='open .'
+	alias memo='/Users/kohei/shellscripts/geekToolMemo.sh'
+	alias vim='reattach-to-user-namespace vim'
+	alias vi='vim'
+fi
+
 alias lighton='curl http://192.168.11.10:8080/on;echo'
 alias lightoff='curl http://192.168.11.10:8080/off;echo'
 alias doorsleep='curl http://192.168.11.10:8080/sleep;echo'
 alias doorwakeup='curl http://192.168.11.10:8080/wakeup;echo'
-
-alias vim='reattach-to-user-namespace vim'
-alias vi='vim'
 
 echo 'hello,world .bashAliases is sourced'
