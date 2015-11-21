@@ -1,4 +1,3 @@
-alias ls='ls -G'
 alias ll='ls -alF'
 alias la='ls -a'
 alias cp='cp -i'
@@ -7,6 +6,7 @@ alias rm='rm -i'
 alias grep='grep --color=auto'
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
+	alias ls='ls -G'
 	alias f='open .'
 	alias memo='/Users/kohei/shellscripts/geekToolMemo.sh'
 	alias vim='reattach-to-user-namespace vim'
