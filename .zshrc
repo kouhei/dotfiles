@@ -49,7 +49,7 @@ export ZSH=/Users/kohei/.oh-my-zsh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby osx bundler brew rails emoji-clock)
+plugins=(git ruby osx brew tmux)
 
 # User configuration
 
@@ -85,7 +85,6 @@ source $ZSH/oh-my-zsh.sh
 #my settings
 autoload -U compinit
 compinit
-
 if [ "$(uname)" = 'Darwin' ];then
   if [ -e $HOME/.bash/itunes_completion.sh ];then
     source $HOME/.bash/itunes_completion.sh
@@ -107,5 +106,4 @@ if [ -e $HOME/.bash_aliases ];then
 elif [ -L $HOME/.bash_aliases ];then
   source $HOME/.bash_aliases
 fi
-
 echo "zshrc"
