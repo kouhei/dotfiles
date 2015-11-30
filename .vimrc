@@ -77,12 +77,6 @@ autocmd MyAutoCmd User plugin-template-loaded
     \ |   silent! execute 'normal! "_da>'
     \ | endif
 
-"gitてきなやつ
-NeoBundleLazy "sjl/gundo.vim", {
-      \ "autoload": {
-      \   "commands": ['GundoToggle'],
-      \}}
-nnoremap <Leader>g :GundoToggle<CR>
 
 "t1,t2....などでタブ移動
 "参考:http://qiita.com/wadako111/items/755e753677dd72d8036d
@@ -205,7 +199,7 @@ set matchtime=3
 
 "http://qiita.com/inodev/items/4f4d5412e65c2564b273
 "インサートモードでjjをおすとEsc押したのと同じになる
-"inoremap <silent> jj <ESC>
+inoremap <silent> jj <ESC>
 
 set paste
 
