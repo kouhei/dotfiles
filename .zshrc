@@ -90,8 +90,9 @@ if [ "$(uname)" = 'Darwin' ];then
     source $HOME/.bash/itunes_completion.sh
   fi
   alias f="open -a Finder ./"
-  eval "$(rbenv init -)"
-  powerline-daemon -q
+
+  if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+	powerline-daemon -q
   source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
