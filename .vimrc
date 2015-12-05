@@ -185,8 +185,10 @@ set sidescrolloff=16
 set sidescroll=1
 set hlsearch
 
+"タブ入力を空白文字に置き換える
 set expandtab
-set tabstop=2
+"タブ文字を何文字分に展開するか
+set tabstop=4
 set shiftwidth=2
 set autoindent
 set smartindent
@@ -196,6 +198,26 @@ set display=lastline
 set pumheight=10
 set showmatch
 set matchtime=3
+
+
+"http://d.hatena.ne.jp/Kae315/20110511/1305061873
+"コマンドライン補完するとき候補を表示する
+set wildmenu
+
+"http://d.hatena.ne.jp/over80/20090305/1236264851
+"ifなど、特定のキーワードで始まる行の末尾でEnterを押した際には、次行を1段下げてautoindentさせるための設定
+autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+"http://d.hatena.ne.jp/shuji_w6e/20090908/1252418641
+"FileTypeがPythonの場合、Ctrl+PでPythonのスクリプトとして実行されます。
+" Execute python script C-P 
+function! s:ExecPy()
+    exe "!" . &ft . " %"
+:endfunction
+command! Exec call <SID>ExecPy()
+autocmd FileType python map <silent> <C-P> :call <SID>ExecPy()<CR>
+
+
 
 "http://qiita.com/inodev/items/4f4d5412e65c2564b273
 "インサートモードでjjをおすとEsc押したのと同じになる
@@ -231,6 +253,9 @@ set switchbuf=useopen
 " 対応括弧に'<'と'>'のペアを追加
 set matchpairs& matchpairs+=<:>
 " バックスペースでなんでも消せるようにする
+"indent: オートインデントの空白文字をBSキーで削除できるようになる。
+"eol: 行の先頭でBSキーを押すことで、前の行の改行文字を削除して前の行と連結できる。これで劇的に便利になる。行の連結方法、知らなかった...。
+"start: ctrl+uやctrl+wで入力した文字以外も削除できるようになる。
 set backspace=indent,eol,start
 " クリップボードをデフォルトのレジスタとして指定。後にYankRingを使うので
 " 'unnamedplus'が存在しているかどうかで設定を分ける必要がある
