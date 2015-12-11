@@ -41,42 +41,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 
 "ここからjs用
-"NeoBundle 'marijnh/tern_for_vim'
-"いい感じのjsのインデントとシンタックスカラー
-NeoBundle 'pangloss/vim-javascript'
-
-"ctrl+oで補完
-" complete
-NeoBundle 'myhere/vim-nodejs-complete'
-autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-if !exists('g:neocomplcache_omni_functions')
-  let g:neocomplcache_omni_functions = {}
-endif
-let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
-
-let g:node_usejscomplete = 1
-
-" 水平に分割する
-let g:quickrun_config={'*': {'split': ''}}
-
 "jsここまで
 
 "ファイルツリー
 NeoBundle 'scrooloose/nerdtree'
-
-NeoBundle "thinca/vim-template"
-" テンプレート中に含まれる特定文字列を置き換える
-autocmd MyAutoCmd User plugin-template-loaded call s:template_keywords()
-function! s:template_keywords()
-    silent! %s/<+DATE+>/\=strftime('%Y-%m-%d')/g
-    silent! %s/<+FILENAME+>/\=expand('%:r')/g
-endfunction
-" テンプレート中に含まれる'<+CURSOR+>'にカーソルを移動
-autocmd MyAutoCmd User plugin-template-loaded
-    \   if search('<+CURSOR+>')
-    \ |   silent! execute 'normal! "_da>'
-    \ | endif
-
 
 "t1,t2....などでタブ移動
 "参考:http://qiita.com/wadako111/items/755e753677dd72d8036d
@@ -130,11 +98,6 @@ map <silent> [Tag]p :tabprevious<CR>
 NeoBundle 'nathanaelkane/vim-indent-guides'
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
-
-
-"補完
-NeoBundle 'Shougo/neocomplcache'
-
 
 
 
@@ -229,9 +192,9 @@ set paste
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 " Powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
 set laststatus=2
 set showtabline=2
 set noshowmode
@@ -252,20 +215,12 @@ set infercase           " 補完時に大文字小文字を区別しない
 set switchbuf=useopen
 " 対応括弧に'<'と'>'のペアを追加
 set matchpairs& matchpairs+=<:>
+
 " バックスペースでなんでも消せるようにする
 "indent: オートインデントの空白文字をBSキーで削除できるようになる。
 "eol: 行の先頭でBSキーを押すことで、前の行の改行文字を削除して前の行と連結できる。これで劇的に便利になる。行の連結方法、知らなかった...。
 "start: ctrl+uやctrl+wで入力した文字以外も削除できるようになる。
 set backspace=indent,eol,start
-" クリップボードをデフォルトのレジスタとして指定。後にYankRingを使うので
-" 'unnamedplus'が存在しているかどうかで設定を分ける必要がある
-"if has('unnamedplus')
-    " set clipboard& clipboard+=unnamedplus " 2013-07-03 14:30 unnamed 追加
-    "set clipboard& clipboard+=unnamedplus,unnamed
-"else
-    " set clipboard& clipboard+=unnamed,autoselect 2013-06-24 10:00 autoselect 削除
-   "set clipboard& clipboard+=autoselect,unnamed
-"endif
 
 set nowritebackup
 set nobackup
@@ -291,9 +246,6 @@ nmap <silent> <Esc><Esc> :nohlsearch<CR>
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
 au BufNewFile,BufRead * match ZenkakuSpace /　/
 
-" カーソル下の単語を * で検索
-vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
-
 " 検索後にジャンプした際に検索単語を画面中央に持ってくる
 nnoremap n nzz
 nnoremap N Nzz
@@ -312,9 +264,6 @@ vnoremap v $h
 " TABにて対応ペアにジャンプ
 nnoremap <Tab> %
 vnoremap <Tab> %
-
-" w!! でスーパーユーザーとして保存（sudoが使える環境限定）
-cmap w!! w !sudo tee > /dev/null %
 
 " ~/.vimrc.localが存在する場合のみ設定を読み込む
 let s:local_vimrc = expand('~/.vimrc.local')
