@@ -7,7 +7,6 @@ augroup END
 "*****************************************************************************
 "" NeoBundle core
 "*****************************************************************************
-scriptencoding utf-8
 
 if has('vim_starting')
   set nocompatible               " Be iMproved
@@ -39,9 +38,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-
-"ここからjs用
-"jsここまで
 
 "ファイルツリー
 NeoBundle 'scrooloose/nerdtree'
@@ -186,7 +182,7 @@ autocmd FileType python map <silent> <C-P> :call <SID>ExecPy()<CR>
 "インサートモードでjjをおすとEsc押したのと同じになる
 inoremap <silent> jj <ESC>
 
-set paste
+"set paste
 
 "ctrl+eでファイルツリー表示
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
@@ -222,9 +218,9 @@ set matchpairs& matchpairs+=<:>
 "start: ctrl+uやctrl+wで入力した文字以外も削除できるようになる。
 set backspace=indent,eol,start
 
-set nowritebackup
-set nobackup
-set noswapfile
+"set nowritebackup
+"set nobackup
+"set noswapfile
 
 set list  " 不可視文字の可視化
 set wrap  " 長いテキストの折り返し
@@ -232,11 +228,11 @@ set textwidth=0         " 自動的に改行が入るのを無効化
 set colorcolumn=80      " その代わり80文字目にラインを入れる
 
 " 前時代的スクリーンベルを無効化
-set t_vb=
-set novisualbell
+"set t_vb=
+"set novisualbell
 
 " デフォルト不可視文字は美しくないのでUnicodeで綺麗に
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+"set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 
 "キー設定"
 " ESCを二回押すことでハイライトを消す
