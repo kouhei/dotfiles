@@ -1,8 +1,6 @@
 echo "bashrc"
 if [ "$(uname)" = 'Linux' ];then
   # ~/.bashrc: executed by bash(1) for non-login shells.
-  # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-  # for examples
 
   # If not running interactively, don't do anything
   [ -z "$PS1" ] && return
@@ -77,21 +75,8 @@ if [ "$(uname)" = 'Linux' ];then
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
   fi
-
-  # some more ls aliases
-  #alias ll='ls -l'
-  #alias la='ls -A'
-  #alias l='ls -CF'
-
-  # Alias definitions.
-  # You may want to put all your additions into a separate file like
-  # ~/.bash_aliases, instead of adding them here directly.
-  # See /usr/share/doc/bash-doc/examples in the bash-doc package.
+  
 
   # enable programmable completion features (you don't need to enable
   # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -123,32 +108,16 @@ fi
 
 if [ -e $HOME/.bashAliases ]; then
   echo ".bashAliases exist"
-  . $HOME/.bashAliases
+  source $HOME/.bashAliases
 elif [ -L $HOME/.bashAliases ];then
   echo ".bashAliases is ln"
-  . $HOME/.bashAliases
+  source $HOME/.bashAliases
 fi
 
 if [ -e $HOME/.bash_aliases ]; then
   echo "bash_aliases exist"
-  . $HOME/.bash_aliases
+  source $HOME/.bash_aliases
 elif [ -L $HOME/.bash_aliases ];then
   echo "bash_aliases is ln"
-  . $HOME/.bash_aliases
-fi
-
-if [ "$(uname)" = "Linux" ];then
-  $HOME/shellScripts/ip.sh
-  echo "$(tput setaf 2)
-   .~~.   .~~.    `date +"%A, %e %B %Y, %r"`
-  '. \ ' ' / .'   `uname -srmo`$(tput setaf 1)
-   .~ .~~~..~.    
-  : .~.'~'.~. :   Uptime.............: ${UPTIME}
- ~ (   ) (   ) ~  Memory.............: `cat /proc/meminfo | grep MemFree | awk {'print $2'}`kB (Free) / `cat /proc/meminfo | grep MemTotal | awk {'print $2'}`kB (Total)
-( : '~'.~.'~' : ) Load Averages......: ${one}, ${five}, ${fifteen} (1, 5, 15 min)
- ~ .~ (   ) ~. ~  Running Processes..: `ps ax | wc -l | tr -d " "`
-  (  : '~' :  )   IP Addresses.......: `cat $HOME/ip`
-   '~ .~~~. ~'    Free Disk Space SD.: `df -Pk | grep -E '/root' | awk '{ print $4 }' | awk -F '.' '{ print $1 }'`k on /root 
-       '~'        CPU Temperature....: `exec -- /opt/vc/bin/vcgencmd measure_temp | cut -c "6-9"` C 
-$(tput sgr0)"
+  source $HOME/.bash_aliases
 fi
