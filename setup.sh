@@ -1,12 +1,12 @@
 #!/bin/bash
 
-DOT_FILES=(.vimrc .bashrc .bashAliases .bash_profile .bash .zshrc)
+DOT_FILES=(.vimrc .bashrc .bashAliases .bash_profile .bash .zshrc .tmux.conf)
 for file in ${DOT_FILES[@]}
 do
   if [ -e $HOME/$file ]; then
     echo "既に存在します: $file"
-    cp -r $file $HOME/dotfile$file 
-  elif [ -n $HOME/$file ]; then
+    cp -r $file $HOME/dotfile$file
+  elif [ -L $HOME/$file ]; then
     echo "既に存在します(シンボリックリンクです): $file"
     cp -r $file $HOME/dotfile$file
   else
