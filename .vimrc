@@ -62,9 +62,15 @@ NeoBundleLazy 'tpope/vim-endwise', {
 NeoBundle 'nathanaelkane/vim-indent-guides'
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+       autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=red ctermbg=245
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=240
 
-
-
+"emmet のvim版(htmlの入力)
+NeoBundle 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<c-l>'
 
 
 
@@ -115,8 +121,10 @@ set background=dark
 "let g:molokai_original = 1
 "let g:rehash256 = 1
 "colorscheme hybrid
-colorscheme solarized
+"colorscheme solarized
 let g:solarized_termcolors=256
+"colorscheme hybrid_reverse
+colorscheme hybrid_material
 "カーソルのある行をハイライト
 set cursorline
 set showcmd
