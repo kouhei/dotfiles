@@ -21,6 +21,7 @@ if [ $UNAME = 'Darwin' ];then
   alias vim='reattach-to-user-namespace vim'
   alias vi='reattach-to-user-namespace vim'
   alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+  alias twitter='rainbowstream'
 fi
 
 alias lighton='curl http://192.168.11.14:8080/on;echo'
