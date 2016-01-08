@@ -12,12 +12,12 @@ for file in ${DOT_FILES[@]}
 do
   if [ -e $HOME/$file ]; then
     echo "既に存在します: $file"
-    #cp -r $file $HOME/dotfiles/dotfile$file
+    cp -r $script_dir/$file $HOME/dotfiles/dotfile$file
   elif [ -L $HOME/$file ]; then
     echo "既に存在します(シンボリックリンクです): $file"
-    #cp -r $file $HOME/dotfiles/dotfile$file
+    cp -r $script_dir/$file $HOME/dotfiles/dotfile$file
   else
-    #ln -s $file $HOME/$file
+    ln -s $script_dir/$file $HOME/$file
     echo "シンボリックリンクを貼りました: $file"
   fi
 done
