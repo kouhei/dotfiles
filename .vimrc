@@ -316,7 +316,7 @@ map <silent> [Tag]p :tabprevious<CR>
 
 
 
-
+set backupskip=/tmp/*,/private/tmp/*
 
 
 " ~/.vimrc.localが存在する場合のみ設定を読み込む
