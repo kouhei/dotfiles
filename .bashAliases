@@ -31,5 +31,6 @@ alias doorwakeup='curl http://192.168.11.14:8080/wakeup;echo'
 
 if [ $UNAME = 'Linux' ];then
   alias diff='vim -d'
+  alias vi='vim'
 fi
 echo '.bashAliases is sourced'
