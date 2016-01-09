@@ -134,6 +134,8 @@ set incsearch
 set autowrite
 set hidden
 
+set nofixeol "最終行の改行挿入を無効に
+
 set whichwrap=b,s,h,l,<,>,[,]
 set scrolloff=8
 set sidescrolloff=16
