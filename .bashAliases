@@ -17,9 +17,9 @@ UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
   alias ls='ls -G'
   alias f='open .'
-  alias memo='$HOME/shellscripts/geekToolMemo.sh'
   alias vim='reattach-to-user-namespace vim'
   alias vi='reattach-to-user-namespace vim'
+  alias memo='vim $HOME/raspi'
   alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
   alias twitter='rainbowstream'
 fi
