@@ -17,6 +17,8 @@ if [ $UNAME = 'Darwin' ]; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
   export PATH=$PATH:~/Library/Python/2.7/bin
+  export GOPATH="$HOME/.go"
+  export PATH="$PATH:$HOME/.go/bin"
 elif [ $UNAME = 'Linux' ]; then
     echo "this is Linux."
 fi
