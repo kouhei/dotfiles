@@ -178,6 +178,9 @@ autocmd FileType python map <silent> <C-P> :call <SID>ExecPy()<CR>
 "http://qiita.com/inodev/items/4f4d5412e65c2564b273
 "インサートモードでjjをおすとEsc押したのと同じになる
 inoremap <silent> jj <ESC>
+inoremap <silent> kk <ESC>
+inoremap <silent> hh <ESC>
+inoremap <silent> ll <ESC>
 " 挿入モードでのカーソル移動
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
