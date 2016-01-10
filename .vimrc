@@ -58,7 +58,7 @@ NeoBundleLazy 'tpope/vim-endwise', {
   \ 'autoload' : { 'insert' : 1,}}
 
 
-" インデントに色を付けて見やすくする
+" インデントに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
