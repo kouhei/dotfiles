@@ -44,10 +44,10 @@ NeoBundle "Shougo/neocomplete"
 
 
 "ファイルツリー
-NeoBundle 'scrooloose/nerdtree'
+"NeoBundle 'scrooloose/nerdtree'
 
 "ctrl+eでファイルツリー表示
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+"nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 
 "とじカッコ自動入力
@@ -70,7 +70,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=240
 
 "emmet のvim版(htmlの入力)
 NeoBundle 'mattn/emmet-vim'
-let g:user_emmet_leader_key='<c-l>'
+let g:user_emmet_leader_key='<c-q>'
 
 
 
@@ -134,7 +134,7 @@ set incsearch
 set autowrite
 set hidden
 
-set nofixeol "最終行の改行挿入を無効に
+"set nofixeol "最終行の改行挿入を無効に?
 
 set whichwrap=b,s,h,l,<,>,[,]
 set scrolloff=8
@@ -182,7 +182,6 @@ autocmd FileType python map <silent> <C-P> :call <SID>ExecPy()<CR>
 inoremap <silent> jj <ESC>
 inoremap <silent> kk <ESC>
 inoremap <silent> hh <ESC>
-inoremap <silent> ll <ESC>
 " 挿入モードでのカーソル移動
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
