@@ -29,6 +29,8 @@ on run argv
       return played count of current track
     else if cmd = "playlist" then
       return name of current playlist
+    else if cmd = "lyrics" then
+      return lyrics of current track
     else
       return "next prev forward back rewind play playpause pause stop name artist album count playlist"
     end if
