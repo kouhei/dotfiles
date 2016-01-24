@@ -32,7 +32,7 @@ on run argv
     else if cmd = "lyrics" then
       return lyrics of current track
     else
-      return "next prev forward back rewind play playpause pause stop name artist album count playlist"
+      return "next prev forward back rewind play playpause pause stop name artist album count playlist lyrics"
     end if
   end tell
 end run
