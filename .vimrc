@@ -1,3 +1,7 @@
+
+" 文字コードの指定
+set enc=utf-8
+set fileencodings=utf-8,euc-jp,sjis,cp932,iso-2022-jp
 scriptencoding utf-8
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
@@ -8,7 +12,7 @@ augroup END
 "*****************************************************************************
 
 if has('vim_starting')
-  set nocompatible               " Be iMproved
+  set nocompatible
 
   " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -33,25 +37,19 @@ endif
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 "beginとendの間にインストールするものを書く
-" Let NeoBundle manage NeoBundle
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 "自動補完
-"NeoBundle 'Shougo/neocomplcache'
 NeoBundle "Shougo/neocomplete"
 
-
-
 "ファイルツリー
-"NeoBundle 'scrooloose/nerdtree'
-
+NeoBundle 'scrooloose/nerdtree'
 "ctrl+eでファイルツリー表示
-"nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 "とじカッコ自動入力
-NeoBundle 'Townk/vim-autoclose'
+"NeoBundle 'Townk/vim-autoclose'
 
 "ifなどの終了宣言を自動入力
 NeoBundleLazy 'tpope/vim-endwise', {
@@ -67,12 +65,6 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
        autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=red ctermbg=245
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=240
-
-"emmet のvim版(htmlの入力)
-NeoBundle 'mattn/emmet-vim'
-let g:user_emmet_leader_key='<c-q>'
-
-
 
 "==========================================
 "neocomplete.vim
@@ -110,10 +102,10 @@ filetype plugin indent on
 
 "my settings
 syntax enable
+
 " colorschemeの設定前に書くこと
 " line番号の色を設定
 " ~/show256colors.plで色に対応する番号がわかる
-" perl show256colors.pl で実行
 autocmd ColorScheme * highlight LineNr ctermfg=153
 
 set background=dark
@@ -122,7 +114,7 @@ set background=dark
 "let g:rehash256 = 1
 "colorscheme hybrid
 "colorscheme solarized
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 "colorscheme hybrid_reverse
 colorscheme hybrid_material
 "カーソルのある行をハイライト
@@ -133,8 +125,6 @@ set smartcase
 set incsearch
 set autowrite
 set hidden
-
-"set nofixeol "最終行の改行挿入を無効に?
 
 set whichwrap=b,s,h,l,<,>,[,]
 set scrolloff=8
@@ -152,12 +142,20 @@ set autoindent
 set smartindent
 
 set number
+"set relativenumber "現在行からの相対的な行数を表示
 set display=lastline
 set pumheight=10
 set showmatch "対応するカッコをハイライトする時間
 set matchtime=2 "対応するカッコをハイライトする時間(秒)
 
-
+"http://blog.papix.net/entry/2012/12/14/042937
+" カーソルを自動的に()の中へ
+imap {} {}<Left>
+imap [] []<Left>
+imap () ()<Left>
+imap "" ""<Left>
+imap '' ''<Left>
+imap <> <><Left>
 
 "コマンドライン補完するとき候補を表示する
 set wildmenu
@@ -165,16 +163,6 @@ set wildmenu
 "http://d.hatena.ne.jp/over80/20090305/1236264851
 "ifなど、特定のキーワードで始まる行の末尾でEnterを押した際には、次行を1段下げてautoindentさせるための設定
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-
-"http://d.hatena.ne.jp/shuji_w6e/20090908/1252418641
-"FileTypeがPythonの場合、Ctrl+PでPythonのスクリプトとして実行されます。
-" Execute python script C-P 
-function! s:ExecPy()
-    exe "!" . &ft . " %"
-:endfunction
-command! Exec call <SID>ExecPy()
-autocmd FileType python map <silent> <C-P> :call <SID>ExecPy()<CR>
-
 
 
 "http://qiita.com/inodev/items/4f4d5412e65c2564b273
@@ -198,6 +186,11 @@ set laststatus=2
 set showtabline=2
 set noshowmode
 
+" Powerlineの設定
+let g:Powerline_symbols = 'fancy'
+" "文字化けするならこっち使う
+"let g:Powerline_symbols = 'compatible'
+set t_Co=256
 
 set clipboard=unnamed,autoselect
 
@@ -205,8 +198,8 @@ set clipboard=unnamed,autoselect
 "http://lambdalisue.hatenablog.com/entry/2013/06/23/071344参考
 
 " バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
-cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
-cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+"cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+"cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
 set shiftround
 set infercase           " 補完時に大文字小文字を区別しない
@@ -216,7 +209,7 @@ set matchpairs& matchpairs+=<:>
 
 " バックスペースでなんでも消せるようにする
 "indent: オートインデントの空白文字をBSキーで削除できるようになる。
-"eol: 行の先頭でBSキーを押すことで、前の行の改行文字を削除して前の行と連結できる。これで劇的に便利になる。行の連結方法、知らなかった...。
+"eol: 行の先頭でBSキーを押すことで、前の行の改行文字を削除して前の行と連結できる
 "start: ctrl+uやctrl+wで入力した文字以外も削除できるようになる。
 set backspace=indent,eol,start
 
@@ -226,15 +219,12 @@ set backspace=indent,eol,start
 
 set list  " 不可視文字の可視化
 set wrap  " 長いテキストの折り返し
-set textwidth=0         " 自動的に改行が入るのを無効化
-set colorcolumn=80      " その代わり80文字目にラインを入れる
+set textwidth=0         "自動的に改行が入るのを無効化
+set colorcolumn=80      "その代わり80文字目にラインを入れる
 
-" 前時代的スクリーンベルを無効化
+" スクリーンベルを無効化
 set t_vb=
 set novisualbell
-
-" デフォルト不可視文字は美しくないのでUnicodeで綺麗に
-"set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 
 "キー設定"
 " ESCを二回押すことでハイライトを消す
@@ -259,69 +249,56 @@ nnoremap k gk
 " vを二回で行末まで選択
 vnoremap v $h
 
-" TABにて対応ペアにジャンプ
-"nnoremap <Tab> %
-"vnoremap <Tab> %
-
-
-"set virtualedit=all     " カーソルを文字が存在しない部分でも動けるようにする
-
-
-
-
-
 
 "t1,t2....などでタブ移動
 "参考:http://qiita.com/wadako111/items/755e753677dd72d8036d
 " Anywhere SID.
-function! s:SID_PREFIX()
-  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-endfunction
+"function! s:SID_PREFIX()
+"  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+"endfunction
 
 " Set tabline.
-function! s:my_tabline()  "{{{
-  let s = ''
-  for i in range(1, tabpagenr('$'))
-    let bufnrs = tabpagebuflist(i)
-    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-    let no = i  " display 0-origin tabpagenr.
-    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-    let title = fnamemodify(bufname(bufnr), ':t')
-    let title = '[' . title . ']'
-    let s .= '%'.i.'T'
-    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ':' . title
-    let s .= mod
-    let s .= '%#TabLineFill# '
-  endfor
-  let s .= '%#TabLineFill#%T%=%#TabLine#'
-  return s
-endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+"function! s:my_tabline()  "{{{
+"  let s = ''
+"  for i in range(1, tabpagenr('$'))
+"    let bufnrs = tabpagebuflist(i)
+"    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+"    let no = i  " display 0-origin tabpagenr.
+"    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+"    let title = fnamemodify(bufname(bufnr), ':t')
+"    let title = '[' . title . ']'
+"    let s .= '%'.i.'T'
+"    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+"    let s .= no . ':' . title
+"    let s .= mod
+"    let s .= '%#TabLineFill# '
+"  endfor
+"  let s .= '%#TabLineFill#%T%=%#TabLine#'
+"  return s
+"endfunction "}}}
+"let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " 常にタブラインを表示
 
 " The prefix key.
-nnoremap    [Tag]   <Nop>
-nmap    t [Tag]
+"nnoremap    [Tag]   <Nop>
+"nmap    t [Tag]
 " Tab jump
-for n in range(1, 9)
-  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-endfor
+"for n in range(1, 9)
+"  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+"endfor
 " t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
 
-map <silent> [Tag]c :tablast <bar> tabnew<CR>
+"map <silent> [Tag]c :tablast <bar> tabnew<CR>
 " tc 新しいタブを一番右に作る
-map <silent> [Tag]x :tabclose<CR>
+"map <silent> [Tag]x :tabclose<CR>
 " tx タブを閉じる
-map <silent> [Tag]n :tabnext<CR>
+"map <silent> [Tag]n :tabnext<CR>
 " tn 次のタブ
-map <silent> [Tag]p :tabprevious<CR>
+"map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
 
-
 set backupskip=/tmp/*,/private/tmp/*
-
 
 " ~/.vimrc.localが存在する場合のみ設定を読み込む
 let s:local_vimrc = expand('~/.vimrc.local')
