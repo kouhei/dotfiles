@@ -19,6 +19,9 @@ if [ $UNAME = 'Darwin' ]; then
   export PATH=$PATH:~/Library/Python/2.7/bin
   export GOPATH="$HOME/.go"
   export PATH="$PATH:$HOME/.go/bin"
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
 elif [ $UNAME = 'Linux' ]; then
     echo "this is Linux."
 fi
