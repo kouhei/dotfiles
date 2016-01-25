@@ -1,4 +1,3 @@
-
 " 文字コードの指定
 set enc=utf-8
 set fileencodings=utf-8,euc-jp,sjis,cp932,iso-2022-jp
@@ -52,8 +51,8 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 "NeoBundle 'Townk/vim-autoclose'
 
 "ifなどの終了宣言を自動入力
-NeoBundleLazy 'tpope/vim-endwise', {
-  \ 'autoload' : { 'insert' : 1,}}
+"NeoBundleLazy 'tpope/vim-endwise', {
+"  \ 'autoload' : { 'insert' : 1,}}
 
 
 " インデントに色を付ける
@@ -99,6 +98,7 @@ NeoBundleCheck
 
 
 filetype plugin indent on
+let g:pydiction_location = '$HOME/.vim/after/ftplugin/pydiction/complete-dict'
 
 "my settings
 syntax enable
@@ -187,10 +187,10 @@ set showtabline=2
 set noshowmode
 
 " Powerlineの設定
-let g:Powerline_symbols = 'fancy'
+"let g:Powerline_symbols = 'fancy'
 " "文字化けするならこっち使う
 "let g:Powerline_symbols = 'compatible'
-set t_Co=256
+"set t_Co=256
 
 set clipboard=unnamed,autoselect
 
@@ -198,8 +198,8 @@ set clipboard=unnamed,autoselect
 "http://lambdalisue.hatenablog.com/entry/2013/06/23/071344参考
 
 " バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
-"cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
-"cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
 set shiftround
 set infercase           " 補完時に大文字小文字を区別しない
