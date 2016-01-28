@@ -1,4 +1,5 @@
 echo "bashAliases"
+alias e='exit'
 alias ll='ls -alF'
 alias la='ls -a'
 alias cp='cp -i'
