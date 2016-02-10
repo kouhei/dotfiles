@@ -47,6 +47,12 @@ NeoBundle 'scrooloose/nerdtree'
 "ctrl+eでファイルツリー表示
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
+"MarkDownプレビュー"
+NeoBundle 'miyakogi/livemark.vim'
+
+"Nimの補完"
+NeoBundle 'zah/nimrod.vim'
+
 "とじカッコ自動入力
 "NeoBundle 'Townk/vim-autoclose'
 
@@ -68,13 +74,39 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=240
 "==========================================
 "neocomplete.vim
 "==========================================
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
 "use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '¥*ku¥*'
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Plugin key-mappings.
+inoremap <expr><C-g>  neocomplete#undo_completion()
+inoremap <expr><C-l>  neocomplete#complete_common_string()
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  " return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+"inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complet
 " Define dictionary.
 "let g:neocomplete#sources#dictionary#dictionaries = {
 "       'default' : ''
@@ -85,13 +117,7 @@ let g:neocomplete#lock_buffer_name_pattern = '¥*ku¥*'
 if !exists('g:neocomplete#keyword_patterns')
   let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplete#keyword_patterns['default'] = '¥h¥w*'
-" Plugin key-mappings.
-inoremap <expr><C-g>  neocomplete#undo_completion()
-inoremap <expr><C-l>  neocomplete#complete_common_string()
-
-
-
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 call neobundle#end()
 NeoBundleCheck
@@ -136,7 +162,8 @@ set hlsearch
 set expandtab
 "タブ文字を何文字分に展開するか
 set tabstop=4
-"vimが挿入するインデント('cindent')やシフトオペレータ(>>や<<)で挿入/削除されるインデントの幅を、画面上の見た目で何文字分であるか指定します。自動的に挿入される量、と覚えておくと良いです。
+"vimが挿入するインデント('cindent')やシフトオペレータ(>>や<<)で挿入/削除されるインデントの幅を、
+"画面上の見た目で何文字分であるか指定します。自動的に挿入される量、と覚えておくと良いです。
 set shiftwidth=2 "cindentやautoindent時に挿入されるタブの幅を決定
 set autoindent
 set smartindent
@@ -161,7 +188,8 @@ imap <> <><Left>
 set wildmenu
 
 "http://d.hatena.ne.jp/over80/20090305/1236264851
-"ifなど、特定のキーワードで始まる行の末尾でEnterを押した際には、次行を1段下げてautoindentさせるための設定
+"ifなど、特定のキーワードで始まる行の末尾でEnterを押した際には、
+"次行を1段下げてautoindentさせるための設定
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 
@@ -213,18 +241,13 @@ set matchpairs& matchpairs+=<:>
 "start: ctrl+uやctrl+wで入力した文字以外も削除できるようになる。
 set backspace=indent,eol,start
 
-"set nowritebackup
-"set nobackup
-"set noswapfile
-
 set list  " 不可視文字の可視化
 set wrap  " 長いテキストの折り返し
-set textwidth=0         "自動的に改行が入るのを無効化
-set colorcolumn=80      "その代わり80文字目にラインを入れる
+set textwidth=0  "自動的に改行が入るのを無効化
+set colorcolumn=80  "その代わり80文字目にラインを入れる
 
 " スクリーンベルを無効化
 set t_vb=
-set novisualbell
 
 "キー設定"
 " ESCを二回押すことでハイライトを消す
