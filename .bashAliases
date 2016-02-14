@@ -1,5 +1,10 @@
 echo "bashAliases"
 alias e='exit'
+
+# 2つ上、3つ上にも移動できるようにする
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
 alias ll='ls -alF'
 alias la='ls -a'
 alias cp='cp -i'
@@ -19,7 +24,8 @@ fi
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
   alias ls='ls -G'
-  alias f='open .'
+  alias f="open -a Finder ./"
+  #alias f='open .'
   alias vim='reattach-to-user-namespace vim'
   alias vi='reattach-to-user-namespace vim'
   alias memo='vim $HOME/raspi'
