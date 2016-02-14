@@ -1,99 +1,13 @@
 echo "zshrc"
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/kohei/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="random"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby osx brew tmux)
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#my settings
 autoload -U compinit
 compinit
 if [ "$(uname)" = 'Darwin' ];then
-  if [ -e $HOME/.bash/itunes_completion.sh ];then
-    source $HOME/.bash/itunes_completion.sh
-  fi
-  alias f="open -a Finder ./"
+  #if [ -e $HOME/.bash/itunes_completion.sh ];then
+  #  source $HOME/.bash/itunes_completion.sh
+  #fi
 
   if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-	powerline-daemon -q
+  powerline-daemon -q
   source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
@@ -108,4 +22,39 @@ if [ -e $HOME/.bash_aliases ];then
 elif [ -L $HOME/.bash_aliases ];then
   source $HOME/.bash_aliases
 fi
-echo "zshrc"
+
+# ディレクトリ名を入力するだけで移動
+setopt auto_cd
+
+# 移動したディレクトリを記録しておく。"cd -[Tab]"で移動履歴を一覧
+setopt auto_pushd
+
+# コマンド訂正
+setopt correct
+
+# cd した先のディレクトリをディレクトリスタックに追加する
+# # ディレクトリスタックとは今までに行ったディレクトリの履歴のこと
+# # `cd +<Tab>` でディレクトリの履歴が表示され、そこに移動できる
+setopt auto_pushd
+
+# # pushd したとき、ディレクトリがすでにスタックに含まれていればスタックに追加しない
+setopt pushd_ignore_dups
+
+# # 拡張 glob を有効にする
+# # glob とはパス名にマッチするワイルドカードパターンのこと
+# # （たとえば `mv hoge.* ~/dir` における "*"）
+# # 拡張 glob を有効にすると # ~ ^ もパターンとして扱われる
+# # どういう意味を持つかは `man zshexpn` の FILENAME GENERATION を参照
+setopt extended_glob
+
+# # 入力したコマンドがすでにコマンド履歴に含まれる場合、履歴から古いほうのコマンドを削除する
+# # コマンド履歴とは今まで入力したコマンドの一覧のことで、上下キーでたどれる
+setopt hist_ignore_all_dups
+
+# # コマンドがスペースで始まる場合、コマンド履歴に追加しない
+# # 例： <Space>echo hello と入力
+setopt hist_ignore_space
+
+autoload -Uz zmv
+alias zmv='noglob zmv -W'
+alias zcp='zmv -C'
