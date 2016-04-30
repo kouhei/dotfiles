@@ -121,3 +121,7 @@ elif [ -L $HOME/.bash_aliases ];then
   echo "bash_aliases is ln"
   source $HOME/.bash_aliases
 fi
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
