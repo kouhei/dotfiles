@@ -1,3 +1,5 @@
 .vim/bundle/*
 .vim/bundle.old/*
 .DS_Store
+.vim/.netrwhist
+.vim/dein
