@@ -13,6 +13,11 @@ alias rm='rm -i'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+if type tmux >/dev/null 2>&1; then
+  alias t='tmux'
+  alias tl='t ls'
+  alias ta='t attach -t'
+fi
 if type python >/dev/null 2>&1; then
     alias py='python'
 fi
@@ -30,6 +35,7 @@ if [ $UNAME = 'Darwin' ];then
   alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
   alias twitter='rainbowstream'
   alias bu='brewu'
+  alias bu='brewu && brew cleanup'
 fi
 
 if [ $UNAME = 'Linux' ];then
