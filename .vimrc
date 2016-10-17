@@ -177,12 +177,12 @@ set matchtime=2 "対応するカッコをハイライトする時間(秒)
 
 "http://blog.papix.net/entry/2012/12/14/042937
 " カーソルを自動的に()の中へ
-imap {} {}<Left>
-imap [] []<Left>
-imap () ()<Left>
-imap "" ""<Left>
-imap '' ''<Left>
-imap <> <><Left>
+"imap {} {}<Left>
+"imap [] []<Left>
+"imap () ()<Left>
+"imap "" ""<Left>
+"imap '' ''<Left>
+"imap <> <><Left>
 
 "コマンドライン補完するとき候補を表示する
 set wildmenu
