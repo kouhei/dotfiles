@@ -6,10 +6,12 @@ if [ -f /usr/local/lib/node_modules ]; then
   export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 fi
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PATH:$PYENV_ROOT/bin"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if type pyenv >/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PATH:$PYENV_ROOT/bin"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ]; then
