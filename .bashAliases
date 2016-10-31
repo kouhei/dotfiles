@@ -26,7 +26,7 @@ if type bpython >/dev/null 2>&1; then
 fi
 if type apt-get >/dev/null 2>&1; then
     alias a='apt-get'
-    alias au='apt-get update && apt-get upgrade -y'
+    alias au='sudo apt-get update && sudo apt-get upgrade -y'
 fi
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
