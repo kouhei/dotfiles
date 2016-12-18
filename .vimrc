@@ -47,6 +47,16 @@ NeoBundle 'scrooloose/nerdtree'
 "ctrl+eでファイルツリー表示
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
+
+NeoBundle 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'solarized'
+      \ }
+
+
+
+NeoBundle 'Shougo/vinarise'
+
 "MarkDownプレビュー"
 "NeoBundle 'miyakogi/livemark.vim'
 
@@ -132,17 +142,13 @@ syntax enable
 " colorschemeの設定前に書くこと
 " line番号の色を設定
 " ~/show256colors.plで色に対応する番号がわかる
-autocmd ColorScheme * highlight LineNr ctermfg=153
+"autocmd ColorScheme * highlight LineNr ctermfg=153
 
 set background=dark
-"colorscheme molokai
-"let g:molokai_original = 1
-"let g:rehash256 = 1
 "colorscheme hybrid
-"colorscheme solarized
-"let g:solarized_termcolors=256
-"colorscheme hybrid_reverse
-colorscheme hybrid_material
+colorscheme solarized
+let g:solarized_termcolors=256
+"colorscheme hybrid_material
 "カーソルのある行をハイライト
 set cursorline
 set showcmd
@@ -193,6 +199,16 @@ set wildmenu
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 
+augroup BinaryXXD
+	autocmd!
+	autocmd BufReadPre  *.bin let &binary =1
+	autocmd BufReadPost * if &binary | Vinarise
+	autocmd BufWritePre * if &binary | Vinarise | endif
+	autocmd BufWritePost * if &binary | Vinarise 
+augroup END
+
+
+
 "http://qiita.com/inodev/items/4f4d5412e65c2564b273
 "インサートモードでjjをおすとEsc押したのと同じになる
 inoremap <silent> jj <ESC>
@@ -207,9 +223,9 @@ inoremap <C-l> <Right>
 "set paste
 
 " Powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
 set laststatus=2
 set showtabline=2
 set noshowmode
