@@ -102,6 +102,7 @@ if [ "$(uname)" = "Darwin" ]; then
     source $HOME/.bash/itunes_completion.sh
   fi
   eval "$(rbenv init -)"
+  eval "$(pyenv init -)"
  powerline-daemon -q
  . ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/bash/powerline.sh
 fi
