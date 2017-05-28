@@ -42,6 +42,43 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "自動補完
 NeoBundle "Shougo/neocomplete"
 
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+
+NeoBundle 'davidhalter/jedi-vim'
+
+
+
+NeoBundleLazy 'vim-scripts/javacomplete', {
+\   'build': {
+\       'cygwin': 'javac autoload/Reflection.java',
+\       'mac': 'javac autoload/Reflection.java',
+\       'unix': 'javac autoload/Reflection.java',
+\   },
+\}
+
 "ファイルツリー
 NeoBundle 'scrooloose/nerdtree'
 "ctrl+eでファイルツリー表示
@@ -198,6 +235,14 @@ set wildmenu
 "次行を1段下げてautoindentさせるための設定
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
+""""""""""java setting
+let g:java_highlight_all=1
+let g:java_highlight_debug=1
+let g:java_allow_cpp_keywords=1
+let g:java_space_errors=1
+let g:java_highlight_functions=1
+
+
 
 augroup BinaryXXD
 	autocmd!
@@ -215,10 +260,10 @@ inoremap <silent> jj <ESC>
 inoremap <silent> kk <ESC>
 inoremap <silent> hh <ESC>
 " 挿入モードでのカーソル移動
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
+"inoremap <C-j> <Down>
+"inoremap <C-k> <Up>
+"inoremap <C-h> <Left>
+"inoremap <C-l> <Right>
 
 "set paste
 
