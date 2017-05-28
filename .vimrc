@@ -235,6 +235,35 @@ set wildmenu
 "次行を1段下げてautoindentさせるための設定
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
+""""
+"python settings
+""""
+"シンタックスハイライトに追加
+if version < 600
+  syntax clear
+elseif exists('b:current_after_syntax')
+  finish
+endif
+
+" We need nocompatible mode in order to continue lines with backslashes.
+" Original setting will be restored.
+let s:cpo_save = &cpo
+set cpo&vim
+
+syn match pythonOperator "\(+\|=\|-\|\^\|\*\)"
+syn match pythonDelimiter "\(,\|\.\|:\)"
+syn keyword pythonSpecialWord self
+
+hi link pythonSpecialWord    Special
+hi link pythonDelimiter      Special
+
+let b:current_after_syntax = 'python'
+
+let &cpo = s:cpo_save
+unlet s:cpo_save
+
+
+
 """"""""""java setting
 let g:java_highlight_all=1
 let g:java_highlight_debug=1
@@ -268,9 +297,6 @@ inoremap <silent> hh <ESC>
 "set paste
 
 " Powerline
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
 set laststatus=2
 set showtabline=2
 set noshowmode
