@@ -27,7 +27,9 @@ PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
 if [ "$(uname)" = 'Darwin' ];then
   if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
   eval "$(pyenv init - zsh)"
-  . ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+  #. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+  
+. ~/.pyenv/versions/2.7.11/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
 if [ -e $HOME/.bashAliases ];then
@@ -154,3 +156,7 @@ if [ $SHLVL = 1 ]; then
     alias tmux="tmux -2 attach || tmux -2 new-session \; source-file ~/.tmux/new-session"
 fi
 export PATH="/usr/local/bin:$PATH"
+alias rm="trash"
+fpath=(/usr/local/share/zsh-completions $fpath)
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
