@@ -10,7 +10,7 @@ colors
 
 #補完機能を有効にする
 autoload -U compinit
-compinit
+compinit -u
 setopt auto_list               # 補完候補を一覧で表示する(d)
 setopt auto_menu               # 補完キー連打で補完候補を順に表示する(d)
 setopt list_packed             # 補完候補をできるだけ詰めて表示する
@@ -20,16 +20,19 @@ setopt list_types              # 補完候補にファイルの種類も表示�
 # 1行表示
 # PROMPT="%~ %# "
 # 2行表示
-PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-%# "
+#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+#%# "
 
+autoload -U promptinit; promptinit
+prompt pure
 
 if [ "$(uname)" = 'Darwin' ];then
   if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
   eval "$(pyenv init - zsh)"
+  eval "$(pyenv virtualenv-init -)"
   #. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
   
-. ~/.pyenv/versions/2.7.11/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+  #. ~/.pyenv/versions/2.7.11/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
 if [ -e $HOME/.bashAliases ];then

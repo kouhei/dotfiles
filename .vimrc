@@ -39,6 +39,9 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+"NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'w0ng/vim-hybrid'
+
 "自動補完
 NeoBundle "Shougo/neocomplete"
 
@@ -182,9 +185,9 @@ syntax enable
 "autocmd ColorScheme * highlight LineNr ctermfg=153
 
 set background=dark
-"colorscheme hybrid
-colorscheme solarized
-let g:solarized_termcolors=256
+colorscheme hybrid
+"colorscheme solarized
+"let g:solarized_termcolors=256
 "colorscheme hybrid_material
 "カーソルのある行をハイライト
 set cursorline
