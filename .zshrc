@@ -1,3 +1,4 @@
+#neofetch
 echo "zshrc"
 
 #export EDITOR=vim        # エディタをvimに設定
@@ -25,6 +26,13 @@ setopt list_types              # 補完候補にファイルの種類も表示�
 
 autoload -U promptinit; promptinit
 prompt pure
+
+#履歴に実行日時もついか
+HISTTIMEFORMAT='%F %T '
+
+setopt HIST_IGNORE_DUPS           # 前と重複する行は記録しない
+setopt HIST_IGNORE_ALL_DUPS       # 履歴中の重複行をファイル記録前に無くす
+setopt HIST_FIND_NO_DUPS          # 履歴検索中、(連続してなくとも)重複を飛ばす
 
 if [ "$(uname)" = 'Darwin' ];then
   if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
@@ -163,3 +171,5 @@ alias rm="trash"
 fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"

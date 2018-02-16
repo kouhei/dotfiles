@@ -32,6 +32,7 @@ UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
   alias ls='ls -G'
   alias f="open -a Finder ./"
+  alias b="brew"
   #alias f='open .'
   alias vim='reattach-to-user-namespace vim'
   alias vi='reattach-to-user-namespace vim'

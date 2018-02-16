@@ -226,7 +226,7 @@ set matchtime=2 "対応するカッコをハイライトする時間(秒)
 "imap {} {}<Left>
 "imap [] []<Left>
 "imap () ()<Left>
-"imap "" ""<Left>
+"imap \"\" \"\"<Left>
 "imap '' ''<Left>
 "imap <> <><Left>
 
