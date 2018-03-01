@@ -10,6 +10,13 @@ alias la='ls -a'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+if [ $UNAME = "Linux" ];then
+  if which trash-put &>/dev/null; then
+    alias rm='trash-put'
+  fi
+  alias open='xdg-open 2>/dev/null'
+  alias ls='ls --color=auto'
+fi
 alias grep='grep -i --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -42,6 +49,7 @@ if [ $UNAME = 'Darwin' ];then
   alias brewu='brew update && brew upgrade'
   alias bu='brewu'
   alias bu='brewu && brew cleanup'
+  alias rm='trash'
 fi
 
 if [ $UNAME = 'Linux' ];then

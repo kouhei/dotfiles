@@ -3,7 +3,7 @@
 script_dir="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 echo $script_dir
 
-DOT_FILES=(.vimrc .bashrc .bashAliases .bash_profile .zshrc .tmux.conf)
+DOT_FILES=(.vimrc .bashrc .bashAliases .bash_profile .zshrc .zprofile .tmux.conf)
 if [ ! -e $HOME/dotfiles ];then
   mkdir $HOME/dotfiles
 fi

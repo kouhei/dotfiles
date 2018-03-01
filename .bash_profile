@@ -6,12 +6,16 @@ if [ -f /usr/local/lib/node_modules ]; then
   export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 fi
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PATH:$PYENV_ROOT/bin"
+
 if type pyenv >/dev/null 2>&1; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PATH:$PYENV_ROOT/bin"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
+
+export GOPATH="$HOME/.go"
+export PATH="$PATH:$HOME/.go/bin"
 
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ]; then
@@ -20,8 +24,6 @@ if [ $UNAME = 'Darwin' ]; then
   GREP_OPTIONS="--color=always";export GREP_OPTIONS
   #export PATH=$PATH:$HOME/android-sdk-macosx/platform-tools/adb
   export PATH=$PATH:~/Library/Python/2.7/bin
-  export GOPATH="$HOME/.go"
-  export PATH="$PATH:$HOME/.go/bin"
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi

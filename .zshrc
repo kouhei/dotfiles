@@ -1,6 +1,8 @@
 #neofetch
 echo "zshrc"
 
+fpath+=('/home/kouhei/node_modules/pure-prompt/functions')
+
 #export EDITOR=vim        # エディタをvimに設定
 bindkey -e               # キーバインドをemacsモードに設定
 #bindkey -v              # キーバインドをviモードに設定
@@ -167,7 +169,6 @@ if [ $SHLVL = 1 ]; then
     alias tmux="tmux -2 attach || tmux -2 new-session \; source-file ~/.tmux/new-session"
 fi
 export PATH="/usr/local/bin:$PATH"
-alias rm="trash"
 fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
