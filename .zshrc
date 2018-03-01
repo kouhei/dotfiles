@@ -173,3 +173,11 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.goenv/bin:$PATH"
 eval "$(goenv init -)"
+if [ $HOME/.zshrc -nt $HOME/.zshrc.zwc ];then
+  echo "compiling zshrc..."
+  zcompile $HOME/.zshrc
+fi
+if [ $HOME/.bashAliases -nt $HOME/.bashAliases.zwc ];then
+  echo "compiling bashAliases..."
+  zcompile $HOME/.bashAliases
+fi
