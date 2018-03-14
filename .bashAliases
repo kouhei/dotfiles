@@ -10,7 +10,7 @@ alias la='ls -a'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-if [ $UNAME = "Linux" ];then
+if [ $(uname) = "Linux" ];then
   if which trash-put &>/dev/null; then
     alias rm='trash-put'
   fi
@@ -30,6 +30,9 @@ if type jupyter >/dev/null 2>&1; then
 fi
 if type python >/dev/null 2>&1; then
     alias py='python'
+fi
+if type ipython >/dev/null 2>&1; then
+  alias ipy="ipython"
 fi
 if type bpython >/dev/null 2>&1; then
     alias bpy='bpython'
