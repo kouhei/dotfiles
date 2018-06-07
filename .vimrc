@@ -23,6 +23,20 @@ Plug 'Shougo/neocomplete'
 "git
 Plug 'tpope/vim-fugitive'
 
+"sublime like nulti cursor
+Plug 'terryma/vim-multiple-cursors'
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
+
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/vinarise'
 
@@ -179,8 +193,6 @@ augroup BinaryXXD
 	autocmd BufWritePost * if &binary | Vinarise 
 augroup END
 
-
-
 "http://qiita.com/inodev/items/4f4d5412e65c2564b273
 "インサートモードでjjをおすとEsc押したのと同じになる
 inoremap <silent> jj <ESC>
@@ -192,7 +204,6 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-"set paste
 
 " Powerline
 set laststatus=2

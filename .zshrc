@@ -29,7 +29,7 @@ setopt list_types              # 補完候補にファイルの種類も表示�
 autoload -U promptinit; promptinit
 prompt pure
 
-#履歴に実行日時もついか
+#履歴に実行日時も追加
 HISTTIMEFORMAT='%F %T '
 
 setopt HIST_IGNORE_DUPS           # 前と重複する行は記録しない
