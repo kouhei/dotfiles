@@ -51,11 +51,11 @@ if [ $UNAME = 'Darwin' ];then
   alias vi='reattach-to-user-namespace vim'
   alias memo='vim $HOME/raspi'
   alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-  alias twitter='rainbowstream'
   alias brewu='brew update && brew upgrade'
   alias bu='brewu'
   alias bu='brewu && brew cleanup'
   alias rm='trash'
+  alias jnote='jupyter notebook'
 fi
 
 if [ $UNAME = 'Linux' ];then

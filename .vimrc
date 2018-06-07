@@ -1,118 +1,43 @@
 " 文字コードの指定
+set helplang=ja,en
 set enc=utf-8
 set fileencodings=utf-8,euc-jp,sjis,cp932,iso-2022-jp
 scriptencoding utf-8
-" release autogroup in MyAutoCmd
-augroup MyAutoCmd
-  autocmd!
-augroup END
-"*****************************************************************************
-"" NeoBundle core
-"*****************************************************************************
-
-if has('vim_starting')
-  set nocompatible
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+set nocompatible
 
 let g:vim_bootstrap_langs = "javascript,ruby,python,c,html"
-let g:vim_bootstrap_editor = "vim"   " nvim or vim
 
-if !filereadable(neobundle_readme)
-  echo "Installing NeoBundle..."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
-  let g:not_finsh_neobundle = "yes"
 
-  " Run shell script if exist on custom select language
-  
-endif
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call plug#begin('~/.vim/plugged')
 "beginとendの間にインストールするものを書く
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+Plug 'w0ng/vim-hybrid'
 
-"NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'w0ng/vim-hybrid'
-
-"自動補完
-NeoBundle "Shougo/neocomplete"
-
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-
-NeoBundle 'davidhalter/jedi-vim'
-
-
-
-NeoBundleLazy 'vim-scripts/javacomplete', {
-\   'build': {
-\       'cygwin': 'javac autoload/Reflection.java',
-\       'mac': 'javac autoload/Reflection.java',
-\       'unix': 'javac autoload/Reflection.java',
-\   },
-\}
-
-"ファイルツリー
-NeoBundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 "ctrl+eでファイルツリー表示
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
+"自動補完
+Plug 'Shougo/neocomplete'
 
-NeoBundle 'itchyny/lightline.vim'
+"git
+Plug 'tpope/vim-fugitive'
+
+Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/vinarise'
+
+"とじカッコ自動入力
+Plug 'Townk/vim-autoclose'
+
+Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'solarized'
       \ }
 
 
 
-NeoBundle 'Shougo/vinarise'
-
-"MarkDownプレビュー"
-"NeoBundle 'miyakogi/livemark.vim'
-
-"Nimの補完"
-"NeoBundle 'zah/nimrod.vim'
-
-"とじカッコ自動入力
-NeoBundle 'Townk/vim-autoclose'
-
-"ifなどの終了宣言を自動入力
-"NeoBundleLazy 'tpope/vim-endwise', {
-"  \ 'autoload' : { 'insert' : 1,}}
-
-
 " インデントに色を付ける
-NeoBundle 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 1
@@ -121,67 +46,47 @@ let g:indent_guides_auto_colors = 0
        autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=red ctermbg=245
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=240
 
-"==========================================
-"neocomplete.vim
-"==========================================
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-"use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" Plugin key-mappings.
-inoremap <expr><C-g>  neocomplete#undo_completion()
-inoremap <expr><C-l>  neocomplete#complete_common_string()
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  " return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-"inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complet
-" Define dictionary.
-"let g:neocomplete#sources#dictionary#dictionaries = {
-"       'default' : ''
-"       'vimshell' : $HOME.'/.vimshell_hist',
-"       'scheme' : $HOME.'/.gosh_completions'
-"       }
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-call neobundle#end()
-NeoBundleCheck
-
-
 filetype plugin indent on
 let g:pydiction_location = '$HOME/.vim/after/ftplugin/pydiction/complete-dict'
+
+
+Plug 'vim-scripts/javacomplete', {
+\   'build': {
+\       'cygwin': 'javac autoload/Reflection.java',
+\       'mac': 'javac autoload/Reflection.java',
+\       'unix': 'javac autoload/Reflection.java',
+\   },
+\}
+
+
+
+Plug 'junegunn/goyo.vim'
+
+
+call plug#end()
+
+"NeoBundle 'altercation/vim-colors-solarized'
+
+
+
+
+
+"" インデントに色を付ける
+"NeoBundle 'nathanaelkane/vim-indent-guides'
+"" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_start_level = 1
+"let g:indent_guides_guide_size = 1
+"let g:indent_guides_auto_colors = 0
+"       autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=red ctermbg=245
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=240
+
 
 "my settings
 syntax enable
 
 " colorschemeの設定前に書くこと
 " line番号の色を設定
-" ~/show256colors.plで色に対応する番号がわかる
 "autocmd ColorScheme * highlight LineNr ctermfg=153
 
 set background=dark
@@ -215,20 +120,10 @@ set autoindent
 set smartindent
 
 set number
-"set relativenumber "現在行からの相対的な行数を表示
 set display=lastline
 set pumheight=10
 set showmatch "対応するカッコをハイライトする時間
 set matchtime=2 "対応するカッコをハイライトする時間(秒)
-
-"http://blog.papix.net/entry/2012/12/14/042937
-" カーソルを自動的に()の中へ
-"imap {} {}<Left>
-"imap [] []<Left>
-"imap () ()<Left>
-"imap \"\" \"\"<Left>
-"imap '' ''<Left>
-"imap <> <><Left>
 
 "コマンドライン補完するとき候補を表示する
 set wildmenu
@@ -292,10 +187,10 @@ inoremap <silent> jj <ESC>
 inoremap <silent> kk <ESC>
 inoremap <silent> hh <ESC>
 " 挿入モードでのカーソル移動
-"inoremap <C-j> <Down>
-"inoremap <C-k> <Up>
-"inoremap <C-h> <Left>
-"inoremap <C-l> <Right>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 
 "set paste
 
@@ -303,12 +198,6 @@ inoremap <silent> hh <ESC>
 set laststatus=2
 set showtabline=2
 set noshowmode
-
-" Powerlineの設定
-"let g:Powerline_symbols = 'fancy'
-" "文字化けするならこっち使う
-"let g:Powerline_symbols = 'compatible'
-"set t_Co=256
 
 set clipboard=unnamed,autoselect
 
@@ -361,54 +250,6 @@ nnoremap k gk
 
 " vを二回で行末まで選択
 vnoremap v $h
-
-
-"t1,t2....などでタブ移動
-"参考:http://qiita.com/wadako111/items/755e753677dd72d8036d
-" Anywhere SID.
-function! s:SID_PREFIX()
-  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
-endfunction
-
-" Set tabline.
-function! s:my_tabline()  "{{{
-  let s = ''
-  for i in range(1, tabpagenr('$'))
-    let bufnrs = tabpagebuflist(i)
-    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-    let no = i  " display 0-origin tabpagenr.
-    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-    let title = fnamemodify(bufname(bufnr), ':t')
-    let title = '[' . title . ']'
-    let s .= '%'.i.'T'
-    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ':' . title
-    let s .= mod
-    let s .= '%#TabLineFill# '
-  endfor
-  let s .= '%#TabLineFill#%T%=%#TabLine#'
-  return s
-endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-set showtabline=2 " 常にタブラインを表示
-
-" The prefix key.
-nnoremap    [Tag]   <Nop>
-nmap    t [Tag]
-" Tab jump
-for n in range(1, 9)
-  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-endfor
-" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
-
-map <silent> [Tag]c :tablast <bar> tabnew<CR>
-" tc 新しいタブを一番右に作る
-map <silent> [Tag]x :tabclose<CR>
-" tx タブを閉じる
-map <silent> [Tag]n :tabnext<CR>
-" tn 次のタブ
-map <silent> [Tag]p :tabprevious<CR>
-" tp 前のタブ
 
 
 set backupskip=/tmp/*,/private/tmp/*

@@ -129,3 +129,5 @@ if type brew >/dev/null 2>&1; then
 fi
 
 shopt -s autocd
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

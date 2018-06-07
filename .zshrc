@@ -36,14 +36,6 @@ setopt HIST_IGNORE_DUPS           # 前と重複する行は記録しない
 setopt HIST_IGNORE_ALL_DUPS       # 履歴中の重複行をファイル記録前に無くす
 setopt HIST_FIND_NO_DUPS          # 履歴検索中、(連続してなくとも)重複を飛ばす
 
-if [ "$(uname)" = 'Darwin' ];then
-  if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-  eval "$(pyenv init - zsh)"
-  eval "$(pyenv virtualenv-init -)"
-  #. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-  
-  #. ~/.pyenv/versions/2.7.11/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-fi
 
 if [ -e $HOME/.bashAliases ];then
   source $HOME/.bashAliases
@@ -171,7 +163,6 @@ fi
 export PATH="/usr/local/bin:$PATH"
 fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.goenv/bin:$PATH"
 eval "$(goenv init -)"
 if [ $HOME/.zshrc -nt $HOME/.zshrc.zwc ];then
@@ -182,3 +173,14 @@ if [ $HOME/.bashAliases -nt $HOME/.bashAliases.zwc ];then
   echo "compiling bashAliases..."
   zcompile $HOME/.bashAliases
 fi
+#オブジェクト指向の授業でJava8使うため
+export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+PATH=$JAVA_HOME/bin:$PATH
+
+if [ "$(uname)" = 'Darwin' ];then
+  if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+  eval "$(pyenv init - zsh)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
