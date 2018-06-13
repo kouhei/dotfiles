@@ -1,5 +1,8 @@
 echo "bashrc"
 if [ "$(uname)" = 'Linux' ];then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
   # ~/.bashrc: executed by bash(1) for non-login shells.
 
   # If not running interactively, don't do anything

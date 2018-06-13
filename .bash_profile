@@ -35,3 +35,6 @@ if [ -f ~/.bashrc ]; then
 fi
 #pathの重複を修正
 #typeset -U path cdpath fpath manpath
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

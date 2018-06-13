@@ -163,8 +163,6 @@ fi
 export PATH="/usr/local/bin:$PATH"
 fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.goenv/bin:$PATH"
-eval "$(goenv init -)"
 if [ $HOME/.zshrc -nt $HOME/.zshrc.zwc ];then
   echo "compiling zshrc..."
   zcompile $HOME/.zshrc
@@ -173,11 +171,22 @@ if [ $HOME/.bashAliases -nt $HOME/.bashAliases.zwc ];then
   echo "compiling bashAliases..."
   zcompile $HOME/.bashAliases
 fi
-#オブジェクト指向の授業でJava8使うため
-export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
-PATH=$JAVA_HOME/bin:$PATH
+
+if which goenv > /dev/null; then
+  export PATH="$HOME/.goenv/bin:$PATH"
+  eval "$(goenv init -)"
+fi
+
+
+if which pyenv > /dev/null; then
+  eval "$(pyenv init - zsh)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 if [ "$(uname)" = 'Darwin' ];then
+  #オブジェクト指向の授業でJava8使うため
+  export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+  PATH=$JAVA_HOME/bin:$PATH
   if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
   eval "$(pyenv init - zsh)"
   eval "$(pyenv virtualenv-init -)"
