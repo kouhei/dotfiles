@@ -10,7 +10,12 @@ let g:vim_bootstrap_langs = "javascript,ruby,python,c,html"
 
 call plug#begin('~/.vim/plugged')
 "beginとendの間にインストールするものを書く
+
+"color scheme
 Plug 'w0ng/vim-hybrid'
+Plug 'atelierbram/Base2Tone-vim'
+Plug 'altercation/vim-colors-solarized'
+"Plug 'jdkanani/vim-material-theme'
 
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -19,6 +24,17 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 "自動補完
 Plug 'Shougo/neocomplete'
+" 起動時に有効化
+let g:neocomplete#enable_at_startup = 1
+" 大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplete#enable_smart_case = 1
+" ポップアップメニューで表示される候補の数
+let g:neocomplete#max_list = 20
+" シンタックスをキャッシュするときの最小文字長
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" 補完を表示する最小文字数
+let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#max_keyword_width = 10000
 
 "git
 Plug 'tpope/vim-fugitive'
@@ -37,7 +53,15 @@ function! Multiple_cursors_after()
   endif
 endfunction
 
+"python補完
 Plug 'davidhalter/jedi-vim'
+autocmd FileType python setlocal completeopt-=preview
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+Plug 'tweekmonster/braceless.vim'
+autocmd FileType python BracelessEnable +fold +highlight
+
 Plug 'Shougo/vinarise'
 
 "とじカッコ自動入力
@@ -73,16 +97,9 @@ Plug 'vim-scripts/javacomplete', {
 \}
 
 
-
 Plug 'junegunn/goyo.vim'
 
-
 call plug#end()
-
-"NeoBundle 'altercation/vim-colors-solarized'
-
-
-
 
 
 "" インデントに色を付ける
@@ -104,7 +121,27 @@ syntax enable
 "autocmd ColorScheme * highlight LineNr ctermfg=153
 
 set background=dark
-colorscheme hybrid
+"colorscheme hybrid
+
+"colorscheme material-theme
+
+" Base2Tone Dark
+"colorscheme Base2Tone_EveningDark
+" or any of the other schemes:
+" colorscheme Base2Tone_MorningDark
+"!colorscheme Base2Tone_SeaDark
+" colorscheme Base2Tone_SpaceDark
+" colorscheme Base2Tone_EarthDark
+"!colorscheme Base2Tone_ForestDark
+" colorscheme Base2Tone_DesertDark
+ colorscheme Base2Tone_LakeDark
+" colorscheme Base2Tone_MeadowDark
+"!colorscheme Base2Tone_DrawbridgeDark
+" colorscheme Base2Tone_PoolDark
+" colorscheme Base2Tone_HeathDark
+" colorscheme Base2Tone_CaveDark
+
+
 "colorscheme solarized
 "let g:solarized_termcolors=256
 "colorscheme hybrid_material
@@ -204,6 +241,12 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+nnoremap s <Nop>
+nnoremap s> 5<C-w>>
+nnoremap s< 5<C-w><
+nnoremap s+ 5<C-w>+
+nnoremap s- 5<C-w>-
+
 
 " Powerline
 set laststatus=2
@@ -259,9 +302,17 @@ nnoremap g# g#zz
 nnoremap j gj
 nnoremap k gk
 
-" vを二回で行末まで選択
-vnoremap v $h
-
+" Using the mouse on a terminal.
+if has('mouse')
+  set mouse=a
+  if has('mouse_sgr')
+    set ttymouse=sgr
+  elseif v:version > 703 || v:version is 703 && has('patch632') " I couldn't use has('mouse_sgr') :-(
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  endif
+endif
 
 set backupskip=/tmp/*,/private/tmp/*
 
