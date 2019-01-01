@@ -1,7 +1,7 @@
 #neofetch
 echo "zshrc"
 
-fpath+=('/home/kouhei/node_modules/pure-prompt/functions')
+fpath+=('~/node_modules/pure-prompt/functions')
 
 #export EDITOR=vim        # エディタをvimに設定
 bindkey -e               # キーバインドをemacsモードに設定
@@ -154,6 +154,8 @@ alias zcp='zmv -C'
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
+
 
 # tmuxが起動していない場合にalias設定を行う
 if [ $SHLVL = 1 ]; then
@@ -177,11 +179,9 @@ if which goenv > /dev/null; then
   eval "$(goenv init -)"
 fi
 
-
-if which pyenv > /dev/null; then
-  eval "$(pyenv init - zsh)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
 
 if [ "$(uname)" = 'Darwin' ];then
   #オブジェクト指向の授業でJava8使うため
@@ -193,3 +193,6 @@ if [ "$(uname)" = 'Darwin' ];then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
