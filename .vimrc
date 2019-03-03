@@ -241,6 +241,9 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+"C-bでバックスペース
+imap <C-b> <BS>
+
 nnoremap s <Nop>
 nnoremap s> 5<C-w>>
 nnoremap s< 5<C-w><

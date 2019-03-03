@@ -17,9 +17,9 @@ if [ $(uname) = "Linux" ];then
   alias open='xdg-open 2>/dev/null'
   alias ls='ls --color=auto'
 fi
-alias grep='grep -i --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+#alias grep='grep -i --color=auto'
+#alias fgrep='fgrep --color=auto'
+#alias egrep='egrep --color=auto'
 if type tmux >/dev/null 2>&1; then
   alias t='tmux'
   alias tl='t ls'
@@ -33,6 +33,12 @@ if type python >/dev/null 2>&1; then
 fi
 if type ipython >/dev/null 2>&1; then
   alias ipy="ipython"
+fi
+if type git >/dev/null 2>&1; then
+  alias g='git'
+  alias gs='git status'
+  alias gd='git diff'
+  alias ga='git add'
 fi
 if type bpython >/dev/null 2>&1; then
     alias bpy='bpython'

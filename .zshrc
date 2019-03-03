@@ -37,18 +37,6 @@ setopt HIST_IGNORE_ALL_DUPS       # 履歴中の重複行をファイル記録�
 setopt HIST_FIND_NO_DUPS          # 履歴検索中、(連続してなくとも)重複を飛ばす
 
 
-if [ -e $HOME/.bashAliases ];then
-  source $HOME/.bashAliases
-elif [ -L $HOME/.bashAliases ];then
-  source $HOME/.bashAliases
-fi
-
-if [ -e $HOME/.bash_aliases ];then
-  source $HOME/.bash_aliases
-elif [ -L $HOME/.bash_aliases ];then
-  source $HOME/.bash_aliases
-fi
-
 # ディレクトリ名を入力するだけで移動
 setopt auto_cd
 
@@ -151,18 +139,16 @@ alias zcp='zmv -C'
 #esac
 
 
-#export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-
-
 
 # tmuxが起動していない場合にalias設定を行う
 if [ $SHLVL = 1 ]; then
     # tmuxにセッションがなかったら新規セッションを立ち上げた際に分割処理設定を読み込む
     alias tmux="tmux -2 attach || tmux -2 new-session \; source-file ~/.tmux/new-session"
 fi
-export PATH="/usr/local/bin:$PATH"
+#export PATH="/usr/local/bin:$PATH"
 fpath=(/usr/local/share/zsh-completions $fpath)
 export PATH="/usr/local/sbin:$PATH"
+
 if [ $HOME/.zshrc -nt $HOME/.zshrc.zwc ];then
   echo "compiling zshrc..."
   zcompile $HOME/.zshrc
@@ -172,24 +158,30 @@ if [ $HOME/.bashAliases -nt $HOME/.bashAliases.zwc ];then
   zcompile $HOME/.bashAliases
 fi
 
-if which goenv > /dev/null; then
-  export PATH="$HOME/.goenv/bin:$PATH"
-  eval "$(goenv init -)"
-fi
+
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
 
 
-if which pyenv > /dev/null; then
-  eval "$(pyenv init - zsh)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+
 
 if [ "$(uname)" = 'Darwin' ];then
   #オブジェクト指向の授業でJava8使うため
-  export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
-  PATH=$JAVA_HOME/bin:$PATH
-  if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-  eval "$(pyenv init - zsh)"
-  eval "$(pyenv virtualenv-init -)"
+  #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+  #PATH=$JAVA_HOME/bin:$PATH
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+if [ -e $HOME/.bashAliases ];then
+  source $HOME/.bashAliases
+elif [ -L $HOME/.bashAliases ];then
+  source $HOME/.bashAliases
+fi
+
+if [ -e $HOME/.bash_aliases ];then
+  source $HOME/.bash_aliases
+elif [ -L $HOME/.bash_aliases ];then
+  source $HOME/.bash_aliases
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
