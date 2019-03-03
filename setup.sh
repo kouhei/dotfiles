@@ -1,4 +1,5 @@
 #!/bin/bash
+LANG=C xdg-user-dirs-gtk-update
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 echo $script_dir
@@ -19,3 +20,16 @@ do
     echo "シンボリックリンクを貼りました: $file"
   fi
 done
+
+sudo apt-get install vim tmux zsh curl vlc build-essential openssh-server
+
+echo "Install vim-plug..."
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
+echo "Install pyenv..."
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+echo "Install nodebrew..."
+curl -L git.io/nodebrew | perl - setup
