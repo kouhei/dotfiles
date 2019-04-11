@@ -1,7 +1,7 @@
 #neofetch
 echo "zshrc"
 
-fpath+=('~/node_modules/pure-prompt/functions')
+fpath+=("$HOME/.anyenv/envs/nodenv/versions/11.13.0/lib/node_modules/pure-prompt/functions")
 
 #export EDITOR=vim        # エディタをvimに設定
 bindkey -e               # キーバインドをemacsモードに設定
@@ -162,6 +162,9 @@ eval "$(anyenv init -)"
 
 if [ "$(uname)" = 'Darwin' ];then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+elif [ "$(uname)" = 'linux' ];then
+  export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+  export PATH="/usr/local/cuda/bin:$PATH"
 fi
 
 if [ -e $HOME/.bashAliases ];then
@@ -178,5 +181,3 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="/usr/local/cuda/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
