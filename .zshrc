@@ -1,7 +1,7 @@
 #neofetch
 echo "zshrc"
 
-fpath+=('~/node_modules/pure-prompt/functions')
+fpath+=("$HOME/.anyenv/envs/nodenv/versions/11.13.0/lib/node_modules/pure-prompt/functions")
 
 #export EDITOR=vim        # エディタをvimに設定
 bindkey -e               # キーバインドをemacsモードに設定
@@ -161,7 +161,15 @@ eval "$(anyenv init -)"
 
 if [ "$(uname)" = 'Darwin' ];then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+elif [ "$(uname)" = 'linux' ];then
+  export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+  export PATH="/usr/local/cuda/bin:$PATH"
 fi
+
+export NVM_DIR="$HOME/.nvm"
+ [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 if [ -e $HOME/.bashAliases ];then
   source $HOME/.bashAliases
@@ -176,12 +184,3 @@ elif [ -L $HOME/.bash_aliases ];then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="/usr/local/cuda/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-export NVM_DIR="$HOME/.nvm"
- [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
