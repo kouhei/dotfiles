@@ -43,7 +43,7 @@ setopt auto_cd
 # 移動したディレクトリを記録しておく。"cd -[Tab]"で移動履歴を一覧
 setopt auto_pushd
 
- # コマンドのスペルを訂正する
+# コマンドのスペルを訂正する
 setopt correct
 
 setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
@@ -156,19 +156,14 @@ if [ $HOME/.bashAliases -nt $HOME/.bashAliases.zwc ];then
   zcompile $HOME/.bashAliases
 fi
 
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
-
 if [ "$(uname)" = 'Darwin' ];then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 elif [ "$(uname)" = 'linux' ];then
-  export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
-  export PATH="/usr/local/cuda/bin:$PATH"
 fi
 
 export NVM_DIR="$HOME/.nvm"
- [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 if [ -e $HOME/.bashAliases ];then

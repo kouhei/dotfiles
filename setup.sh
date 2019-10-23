@@ -2,7 +2,9 @@
 #====================================================================
 # 『デスクトップ』『音楽』などの日本語フォルダー名を英語表記にする
 #====================================================================
-env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
+if [ "$(uname)" = 'linux' ];then
+  env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
+fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 echo $script_dir
