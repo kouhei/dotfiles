@@ -47,7 +47,10 @@ fi
 
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
-exec $SHELL -l
+#exec $SHELL -l
+
+mkdir -p ~/.anyenv/plugins
+git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
 
 echo "Install pyenv, nodenv..."
 anyenv install pyenv
