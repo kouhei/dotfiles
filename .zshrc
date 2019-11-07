@@ -19,6 +19,7 @@ setopt auto_menu               # 補完キー連打で補完候補を順に表�
 setopt list_packed             # 補完候補をできるだけ詰めて表示する
 setopt list_types              # 補完候補にファイルの種類も表示する
 
+
 # プロンプト
 # 1行表示
 # PROMPT="%~ %# "
@@ -26,7 +27,8 @@ setopt list_types              # 補完候補にファイルの種類も表示�
 #PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
 #%# "
 
-autoload -U promptinit; promptinit
+autoload -Uz promptinit
+promptinit
 prompt pure
 
 #履歴に実行日時も追加
@@ -73,6 +75,11 @@ setopt hist_ignore_space
 
 #補完で小文字も大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+#マッチング規則の変更をまずなし（''）でやって，マッチするものがなければ 'm:{a-z}={A-Z} r:|[-_.]=**' で小文字を大文字に置換しつつ補完すると同時に，右側に-か_か.が来る所には * を補ったかのように補完して、それでもなければ大文字を小文字に置き換えるルールを追加して補完する
+#https://gihyo.jp/dev/serial/01/zsh-book/0005
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z} r:|[-_.]=**' '+m:{A-Z}={a-z}'
+
 
 # ../ の後は今いるディレクトリを補完しない
 zstyle ':completion:*' ignore-parents parent pwd ..
