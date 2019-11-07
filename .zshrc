@@ -74,7 +74,7 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
 #補完で小文字も大文字にマッチさせる
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 #マッチング規則の変更をまずなし（''）でやって，マッチするものがなければ 'm:{a-z}={A-Z} r:|[-_.]=**' で小文字を大文字に置換しつつ補完すると同時に，右側に-か_か.が来る所には * を補ったかのように補完して、それでもなければ大文字を小文字に置き換えるルールを追加して補完する
 #https://gihyo.jp/dev/serial/01/zsh-book/0005
