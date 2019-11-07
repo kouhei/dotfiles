@@ -12,10 +12,13 @@ call plug#begin('~/.vim/plugged')
 "beginとendの間にインストールするものを書く
 
 "color scheme
+Plug 'joshdick/onedark.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'atelierbram/Base2Tone-vim'
 Plug 'altercation/vim-colors-solarized'
 "Plug 'jdkanani/vim-material-theme'
+
+Plug 'sheerun/vim-polyglot'
 
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -46,6 +49,13 @@ function! Multiple_cursors_before()
     exe 'NeoCompleteLock'
   endif
 endfunction
+
+" settings for react
+" https://qiita.com/atsumo/items/cdae74a8920320693696
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers=['jsxhint']
 
 function! Multiple_cursors_after()
   if exists(':NeoCompleteUnlock')==2
@@ -140,7 +150,7 @@ set background=dark
 " colorscheme Base2Tone_PoolDark
 " colorscheme Base2Tone_HeathDark
 " colorscheme Base2Tone_CaveDark
-
+ colorscheme onedark
 
 "colorscheme solarized
 "let g:solarized_termcolors=256

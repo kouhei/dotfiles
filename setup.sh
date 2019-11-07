@@ -2,7 +2,9 @@
 #====================================================================
 # 『デスクトップ』『音楽』などの日本語フォルダー名を英語表記にする
 #====================================================================
-env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
+if [ "$(uname)" = 'linux' ];then
+  env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
+fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 echo $script_dir
@@ -45,7 +47,10 @@ fi
 
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
-exec $SHELL -l
+#exec $SHELL -l
+
+mkdir -p ~/.anyenv/plugins
+git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
 
 echo "Install pyenv, nodenv..."
 anyenv install pyenv
