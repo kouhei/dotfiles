@@ -47,6 +47,10 @@ if type apt-get >/dev/null 2>&1; then
     alias a='apt-get'
     alias au='sudo apt-get update && sudo apt-get upgrade -y'
 fi
+if type jupyter >/dev/null 2>&1; then
+    alias j='jupyter'
+    alias nb='j notebook'
+fi
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
   alias ls='ls -G'
