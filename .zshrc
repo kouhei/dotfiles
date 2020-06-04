@@ -1,7 +1,14 @@
-#neofetch
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+  fi
+  #neofetch
 echo "zshrc"
 
 fpath+=("$HOME/.anyenv/envs/nodenv/versions/11.13.0/lib/node_modules/pure-prompt/functions")
+
 
 #export EDITOR=vim        # エディタをvimに設定
 bindkey -e               # キーバインドをemacsモードに設定
@@ -28,6 +35,7 @@ setopt list_types              # 補完候補にファイルの種類も表示�
 
 autoload -U promptinit; promptinit
 prompt pure
+#prompt spaceship
 
 #履歴に実行日時も追加
 HISTTIMEFORMAT='%F %T '
@@ -87,7 +95,6 @@ setopt hist_reduce_blanks
 
 # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
 bindkey '^R' history-incremental-pattern-search-backward
-
 
 #utoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -159,12 +166,20 @@ fi
 if [ "$(uname)" = 'Darwin' ];then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+  #path+="/usr/local/lib/ruby/gems/2.7.0/bin"
 elif [ "$(uname)" = 'linux' ];then
 fi
+#export NVM_DIR="$HOME/.nvm"
+#  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+# The next line updates PATH for the Google Cloud SDK.
+#if [ -f '/Users/kouheiyamada/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kouheiyamada/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+#if [ -f '/Users/kouheiyamada/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kouheiyamada/google-cloud-sdk/completion.zsh.inc'; fi
+
+#export LDFLAGS="-L/usr/local/opt/python@3.8/lib"
 
 if [ -e $HOME/.bashAliases ];then
   source $HOME/.bashAliases
@@ -177,5 +192,7 @@ if [ -e $HOME/.bash_aliases ];then
 elif [ -L $HOME/.bash_aliases ];then
   source $HOME/.bash_aliases
 fi
+#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $(dirname $(gem which colorls))/tab_complete.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
