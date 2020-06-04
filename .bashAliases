@@ -50,6 +50,8 @@ fi
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
   alias ls='ls -G'
+  #alias ls="colorls -h --group-directories-first"
+  #alias ll="ls --almost-all --long"
   alias f="open -a Finder ./"
   alias b="brew"
   #alias f='open .'
