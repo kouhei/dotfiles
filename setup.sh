@@ -38,6 +38,13 @@ if type apt-get > /dev/null 2>&1; then
 fi
 
 UNAME="$(uname)"
+if [ $UNAME = 'Darwin' ]; then
+  if type brew > /dev/null 2>&1; then
+    echo "brew exist!"
+  else
+    echo "Install HomeBrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
 echo "Install anyenv..."
 if [ $UNAME = 'Darwin' ]; then
     brew install anyenv
