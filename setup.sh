@@ -1,15 +1,9 @@
 #!/bin/bash
-#====================================================================
-# 『デスクトップ』『音楽』などの日本語フォルダー名を英語表記にする
-#====================================================================
-if [ "$(uname)" = 'linux' ];then
-  env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
-fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 echo $script_dir
 
-DOT_FILES=(.vimrc .bashrc .bashAliases .bash_profile .zshrc .zprofile .tmux.conf)
+DOT_FILES=(.vimrc .bashAliases .zshrc .zprofile .tmux.conf)
 if [ ! -e $HOME/dotfiles ];then
   mkdir $HOME/dotfiles
 fi
@@ -38,6 +32,12 @@ if type apt-get > /dev/null 2>&1; then
 fi
 
 UNAME="$(uname)"
+
+if [ $UNAME = 'linux' ];then
+  # 『デスクトップ』『音楽』などの日本語フォルダー名を英語表記にする
+  env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
+fi
+
 if [ $UNAME = 'Darwin' ]; then
   if type brew > /dev/null 2>&1; then
     echo "brew exist!"
@@ -45,23 +45,21 @@ if [ $UNAME = 'Darwin' ]; then
     echo "Install HomeBrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-echo "Install anyenv..."
-if [ $UNAME = 'Darwin' ]; then
-    brew install anyenv
-elif [ $UNAME = 'Linux' ]; then
-    git clone https://github.com/anyenv/anyenv ~/.anyenv
-fi
-
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+# echo "Install anyenv..."
+# if [ $UNAME = 'Darwin' ]; then
+#     brew install anyenv
+# elif [ $UNAME = 'Linux' ]; then
+#     git clone https://github.com/anyenv/anyenv ~/.anyenv
+# fi
+# export PATH="$HOME/.anyenv/bin:$PATH"
+# eval "$(anyenv init -)"
 #exec $SHELL -l
+# mkdir -p ~/.anyenv/plugins
+# git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
 
-mkdir -p ~/.anyenv/plugins
-git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
-
-echo "Install pyenv, nodenv..."
-anyenv install pyenv
-anyenv install nodenv
+# echo "Install pyenv, nodenv..."
+# anyenv install pyenv
+# anyenv install nodenv
 
 echo "Install vim-plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
