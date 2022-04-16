@@ -11,12 +11,13 @@ if type anyenv > /dev/null 2>&1; then
   eval "$(anyenv init -)"
 fi
 
+if type gh > /dev/null 2>&1; then
+  eval "$(gh completion -s zsh)"
+fi
+
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ]; then
-  #GREP_OPTIONS="--color=always";export GREP_OPTIONS
-  #export PATH="$PATH:$HOME/android-sdk-macosx/platform-tools/adb"
-  #export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
-  export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+  export PATH="/usr/local/opt/openssl/bin:$PATH"
 elif [ $UNAME = 'Linux' ]; then
     echo "this is Linux."
     export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
@@ -24,6 +25,3 @@ elif [ $UNAME = 'Linux' ]; then
     export PATH="$HOME/.nodenv/bin:$PATH"
     eval "$(nodenv init -)"
 fi
-
-#pathの重複を修正
-#typeset -U path cdpath fpath manpath

@@ -9,14 +9,13 @@ let g:vim_bootstrap_langs = "javascript,ruby,python,c,html"
 
 
 call plug#begin('~/.vim/plugged')
-"beginとendの間にインストールするものを書く
 
 "color scheme
 Plug 'joshdick/onedark.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'atelierbram/Base2Tone-vim'
 Plug 'altercation/vim-colors-solarized'
-"Plug 'jdkanani/vim-material-theme'
+Plug 'jdkanani/vim-material-theme'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -26,21 +25,28 @@ Plug 'jistr/vim-nerdtree-tabs'
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 "自動補完
-Plug 'Shougo/neocomplete'
+"Plug 'Shougo/neocomplete'
 " 起動時に有効化
-let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_at_startup = 1
 " 大文字が入力されるまで大文字小文字の区別を無視する
-let g:neocomplete#enable_smart_case = 1
+"let g:neocomplete#enable_smart_case = 1
 " ポップアップメニューで表示される候補の数
-let g:neocomplete#max_list = 20
+"let g:neocomplete#max_list = 20
 " シンタックスをキャッシュするときの最小文字長
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
 " 補完を表示する最小文字数
-let g:neocomplete#auto_completion_start_length = 2
-let g:neocomplete#max_keyword_width = 10000
+"let g:neocomplete#auto_completion_start_length = 2
+"let g:neocomplete#max_keyword_width = 10000
 
 "git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+"toggle comment
+Plug 'tyru/caw.vim'
+" 行の最初の文字の前にコメント文字をトグル
+nmap <C-s> <Plug>(caw:hatpos:toggle.nx)
+vmap <C/> <Plug>(caw:hatpos:toggle.nx)
 
 "sublime like nulti cursor
 Plug 'terryma/vim-multiple-cursors'
@@ -57,15 +63,15 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers=['jsxhint']
 
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
+"function! Multiple_cursors_after()
+"  if exists(':NeoCompleteUnlock')==2
+"    exe 'NeoCompleteUnlock'
+"  endif
+"endfunction
 
 "python補完
-Plug 'davidhalter/jedi-vim'
-autocmd FileType python setlocal completeopt-=preview
+"Plug 'davidhalter/jedi-vim'
+"autocmd FileType python setlocal completeopt-=preview
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
@@ -128,7 +134,7 @@ syntax enable
 
 " colorschemeの設定前に書くこと
 " line番号の色を設定
-"autocmd ColorScheme * highlight LineNr ctermfg=153
+autocmd ColorScheme * highlight LineNr ctermfg=153
 
 set background=dark
 "colorscheme hybrid
@@ -144,7 +150,7 @@ set background=dark
 " colorscheme Base2Tone_EarthDark
 "!colorscheme Base2Tone_ForestDark
 " colorscheme Base2Tone_DesertDark
- colorscheme Base2Tone_LakeDark
+" colorscheme Base2Tone_LakeDark
 " colorscheme Base2Tone_MeadowDark
 "!colorscheme Base2Tone_DrawbridgeDark
 " colorscheme Base2Tone_PoolDark
@@ -237,7 +243,7 @@ augroup BinaryXXD
 	autocmd BufReadPre  *.bin let &binary =1
 	autocmd BufReadPost * if &binary | Vinarise
 	autocmd BufWritePre * if &binary | Vinarise | endif
-	autocmd BufWritePost * if &binary | Vinarise 
+	autocmd BufWritePost * if &binary | Vinarise
 augroup END
 
 "http://qiita.com/inodev/items/4f4d5412e65c2564b273

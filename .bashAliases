@@ -17,9 +17,9 @@ if [ $(uname) = "Linux" ];then
   alias open='xdg-open 2>/dev/null'
   alias ls='ls --color=auto'
 fi
-#alias grep='grep -i --color=auto'
-#alias fgrep='fgrep --color=auto'
-#alias egrep='egrep --color=auto'
+if which docker-compose &>/dev/null; then
+    alias dc='docker-compose'
+  fi
 if type tmux >/dev/null 2>&1; then
   alias t='tmux'
   alias tl='t ls'
@@ -51,6 +51,13 @@ if type jupyter >/dev/null 2>&1; then
     alias j='jupyter'
     alias nb='j notebook'
 fi
+
+function notify-github-actions-ci-finish() {
+  gh run watch -i10 && osascript -e 'display notification "run is done!" with title "Terminal"'
+}
+
+alias nci=notify-github-actions-ci-finish
+
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
   alias ls='ls -G'
