@@ -12,40 +12,35 @@ echo "================================"
 for file in ${DOT_FILES[@]}
 do
   if [ -e $HOME/$file ]; then
-    echo "既に存在します: $file"
+    echo "already exists: $file"
   elif [ -L $HOME/$file ]; then
-    echo "既に存在します(シンボリックリンクです): $file"
+    echo "already exists(symbolic link): $file"
   else
     ln -s $script_dir/$file $HOME/$file
-    echo "シンボリックリンクを貼りました: $file"
+    echo "link: $file"
   fi
 done
 echo "================================"
 
-if type apt-get > /dev/null 2>&1; then
-    echo "apt-get exist!"     #コマンドが存在する時の処理
-    echo "apt update & upgrade"
-    yes | sudo apt-get update
-    yes | sudo apt-get upgrade
-    echo "install vim tmux zsh curl vlc build-essential openssh-server"
-    sudo apt-get install -y vim tmux zsh curl vlc build-essential openssh-server
-fi
-
 UNAME="$(uname)"
 
 if [ $UNAME = 'linux' ];then
+  if type apt-get > /dev/null 2>&1; then
+    echo "apt-get exist"
+    sh ./aptEssentialsInstall.sh
+  fi
   # 『デスクトップ』『音楽』などの日本語フォルダー名を英語表記にする
   env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
 fi
 
 if [ $UNAME = 'Darwin' ]; then
   if type brew > /dev/null 2>&1; then
-    echo "brew exist!"
+    echo "brew exist"
   else
     echo "Install HomeBrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    sh ./brewEssentialsInstall.sh
   fi
+  sh ./brewEssentialsInstall.sh
 fi
 
 echo "Install vim-plug"

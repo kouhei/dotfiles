@@ -124,5 +124,6 @@ elif [ -L $HOME/.bashAliases ];then
   source $HOME/.bashAliases
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
