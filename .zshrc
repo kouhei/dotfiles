@@ -80,8 +80,8 @@ if [ $HOME/.bashAliases -nt $HOME/.bashAliases.zwc ];then
 fi
 
 if [ "$(uname)" = 'Darwin' ];then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+  # source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
 

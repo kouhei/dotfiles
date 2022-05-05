@@ -44,22 +44,8 @@ if [ $UNAME = 'Darwin' ]; then
   else
     echo "Install HomeBrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-# echo "Install anyenv..."
-# if [ $UNAME = 'Darwin' ]; then
-#     brew install anyenv
-# elif [ $UNAME = 'Linux' ]; then
-#     git clone https://github.com/anyenv/anyenv ~/.anyenv
-# fi
-# export PATH="$HOME/.anyenv/bin:$PATH"
-# eval "$(anyenv init -)"
-#exec $SHELL -l
-# mkdir -p ~/.anyenv/plugins
-# git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
-
-# echo "Install pyenv, nodenv..."
-# anyenv install pyenv
-# anyenv install nodenv
+  fi
+fi
 
 echo "Install vim-plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

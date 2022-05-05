@@ -61,48 +61,13 @@ alias nci=notify-github-actions-ci-finish
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
   alias ls='ls -G'
-  #alias ls="colorls -h --group-directories-first"
-  #alias ll="ls --almost-all --long"
   alias f="open -a Finder ./"
   alias b="brew"
   #alias f='open .'
-  alias vim='reattach-to-user-namespace vim'
-  alias vi='reattach-to-user-namespace vim'
-  alias memo='vim $HOME/raspi'
-  alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
   alias brewu='brew update && brew upgrade'
   alias bu='brewu'
   alias bu='brewu && brew cleanup'
   alias rm='trash'
   alias jnote='jupyter notebook'
-fi
-
-if [ $UNAME = 'Linux' ];then
-
-  if   [ -e /etc/debian_version ] ||
-     [ -e /etc/debian_release ]; then
-    # Check Ubuntu or Debian
-    if [ -e /etc/lsb-release ]; then
-      # Ubuntu
-      dist_name="ubuntu"
-    else
-      # Debian
-      dist_name="debian"
-    fi
-  elif [ -e /etc/fedora-release ]; then
-    # Fedra
-    dist_name="fedora"
-  else
-    # Other
-    echo "unkown distribution"
-    dist_name="unkown"
-  fi
-
-  if [ $dist_name = 'ubuntu' ];then
-    alias f='xdg-open .'
-    alias vi='vim'
-  fi
-
-  alias diff='vim -d'
 fi
 echo ".bashAliases is sourced"
