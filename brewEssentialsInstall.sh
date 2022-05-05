@@ -1,7 +1,8 @@
+#!/bin/sh
 echo "install from brew"
 brew install peco git volta
 # cask
-brew install --cask docker visual-studio-code clipy appcleaner google-chrome deepl notion dropbox spotify rectangle brave-browser typora
+brew install --cask docker visual-studio-code clipy appcleaner google-chrome deepl notion dropbox spotify rectangle brave-browser typora kindle scroll-reverser krisp malwarebytes mas
 
 # optional
 brew install starship
