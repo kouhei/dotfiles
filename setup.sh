@@ -44,6 +44,7 @@ if [ $UNAME = 'Darwin' ]; then
   else
     echo "Install HomeBrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    sh ./brewEssentialsInstall.sh
   fi
 fi
 
@@ -52,3 +53,5 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "DONE!"
+
+echo "open vim and `:PlugInstall`"
