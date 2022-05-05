@@ -13,9 +13,9 @@ autoload -Uz colors
 colors
 
 # プロンプト
-autoload -Uz promptinit
-promptinit
-prompt pure
+# autoload -Uz promptinit
+# promptinit
+# prompt pure
 
 # 補完機能を有効にする
 autoload -U compinit
