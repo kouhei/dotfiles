@@ -97,4 +97,3 @@ if [ $UNAME = 'Darwin' ];then
   alias rm='trash'
   alias jnote='jupyter notebook'
 fi
-echo ".bashAliases is sourced"
