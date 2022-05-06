@@ -7,15 +7,17 @@ if type brew &>/dev/null; then
 
 fpath+=("$HOME/.anyenv/envs/nodenv/versions/11.13.0/lib/node_modules/pure-prompt/functions") # TODO: anyenvを使ってないからパスを変えること
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
 
 # プロンプト
-# autoload -Uz promptinit
-# promptinit
-# prompt pure
+autoload -Uz promptinit
+promptinit
+prompt pure
 
 # 補完機能を有効にする
 autoload -U compinit
@@ -124,6 +126,3 @@ elif [ -L $HOME/.bashAliases ];then
   source $HOME/.bashAliases
 fi
 
-eval "$(starship init zsh)"
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
