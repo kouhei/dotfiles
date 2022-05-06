@@ -5,7 +5,7 @@ if type brew &>/dev/null; then
     compinit
   fi
 
-fpath+=("$HOME/.anyenv/envs/nodenv/versions/11.13.0/lib/node_modules/pure-prompt/functions") # TODO: anyenvを使ってないからパスを変えること
+fpath+=("/opt/homebrew/share/zsh/site-functions")
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
@@ -15,8 +15,7 @@ autoload -Uz colors
 colors
 
 # プロンプト
-autoload -Uz promptinit
-promptinit
+autoload -U promptinit; promptinit
 prompt pure
 
 # 補完機能を有効にする
@@ -125,4 +124,3 @@ if [ -e $HOME/.bashAliases ];then
 elif [ -L $HOME/.bashAliases ];then
   source $HOME/.bashAliases
 fi
-
