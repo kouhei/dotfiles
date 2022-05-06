@@ -22,13 +22,13 @@ done
 echo "================================"
 echo "complete link"
 
-echo "install packages"
 UNAME="$(uname)"
 if [ $UNAME = 'linux' ];then
   # 『デスクトップ』『音楽』などの日本語フォルダー名を英語表記にする
   env LANGUAGE=C LC_MESSAGES=C xdg-user-dirs-gtk-update
   if type apt-get > /dev/null 2>&1; then
     echo "apt-get exist"
+    echo "install packages"
     ./aptEssentialsInstall.sh
   fi
 fi
@@ -39,11 +39,14 @@ if [ $UNAME = 'Darwin' ]; then
     echo "Install HomeBrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
+  echo "install packages"
   ./brewEssentialsInstall.sh
   ./appStore.sh
 fi
 
-# echo "Install vim-plug"
+echo "setup"
+git config --global ghq.root '~/src'
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
