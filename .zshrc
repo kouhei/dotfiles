@@ -1,14 +1,16 @@
 echo "zshrc"
+BREW_PATH=$(brew --prefix)
+
 if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-    autoload -Uz compinit
-    compinit
-  fi
+  FPATH=$BREW_PATH/share/zsh-completions:$FPATH
+  autoload -Uz compinit
+  compinit
+  fpath+=("$BREW_PATH/share/zsh/site-functions")
+fi
 
-fpath+=("/opt/homebrew/share/zsh/site-functions")
-
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+if type gh > /dev/null 2>&1; then
+  eval "$(gh completion -s zsh)"
+fi
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -67,8 +69,12 @@ bindkey -e                  # キーバインドをemacsモードに設定
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 alias zcp='zmv -C'
-fpath=(/usr/local/share/zsh-completions $fpath)
-export PATH="$HOME/.bin:/usr/local/sbin:$PATH"
+
+# if [ "$(uname)" = 'Darwin' ];then
+#   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+#   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# fi
+
 
 # コンパイル
 if [ $HOME/.zshrc -nt $HOME/.zshrc.zwc ];then
@@ -79,45 +85,6 @@ if [ $HOME/.bashAliases -nt $HOME/.bashAliases.zwc ];then
   echo "compiling bashAliases..."
   zcompile $HOME/.bashAliases
 fi
-
-if [ "$(uname)" = 'Darwin' ];then
-  # source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-  # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-fi
-
-
-#export LDFLAGS="-L/usr/local/opt/python@3.8/lib"
-export GOPATH=$HOME
-export PATH=$PATH:$GOPATH/bin
-
-# https://weblog.bulknews.net/ghq-peco-percol-b6be7828dc1b
-function peco-src () {
-    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-src
-bindkey '^]' peco-src
-
-### 過去に移動したことのあるディレクトリを選択。ctrl-uにバインド
-function peco-cdr() {
-  local destination="$(peco-get-destination-from-cdr)"
-  if [ -n "$destination" ]; then
-    BUFFER="cd $destination"
-    zle accept-line
-  else
-    zle reset-prompt
-  fi
-}
-zle -N peco-cdr
-bindkey '^u' peco-cdr
-
-# ブランチを簡単切り替え。gcoで実行できる
-alias -g gco='`git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
-
 
 if [ -e $HOME/.bashAliases ];then
   source $HOME/.bashAliases

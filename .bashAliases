@@ -55,8 +55,35 @@ fi
 function notify-github-actions-ci-finish() {
   gh run watch -i10 && osascript -e 'display notification "run is done!" with title "Terminal"'
 }
-
 alias nci=notify-github-actions-ci-finish
+
+# https://weblog.bulknews.net/ghq-peco-percol-b6be7828dc1b
+function peco-src () {
+    local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
+
+### 過去に移動したことのあるディレクトリを選択。ctrl-uにバインド
+function peco-cdr() {
+  local destination="$(peco-get-destination-from-cdr)"
+  if [ -n "$destination" ]; then
+    BUFFER="cd $destination"
+    zle accept-line
+  else
+    zle reset-prompt
+  fi
+}
+zle -N peco-cdr
+bindkey '^u' peco-cdr
+
+# ブランチを簡単切り替え。gcoで実行できる
+alias -g gco='`git branch | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g"`'
 
 UNAME="$(uname)"
 if [ $UNAME = 'Darwin' ];then
