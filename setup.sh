@@ -46,7 +46,7 @@ fi
 
 echo "setup"
 git config --global ghq.root '~/src'
-
+defaults write com.apple.screencapture name "SS" # スクリーンショットの先頭の文字をSSに
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
