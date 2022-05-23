@@ -47,9 +47,17 @@ fi
 echo "setup"
 git config --global ghq.root '~/src'
 defaults write com.apple.screencapture name "SS" # スクリーンショットの先頭の文字をSSに
+
+# デフォルトで開くアプリを変更
+duti -s org.videolan.vlc .mp3 all
+duti -s org.videolan.vlc .mp4 all
+duti -s abnerworks.Typora .md all
+duti -s com.microsoft.VSCode .txt all
+killall Finder
+
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "setup done!"
 
-echo "reopen terminal & open vim and `:PlugInstall`"
+echo "reopen terminal & open vim and ':PlugInstall'"

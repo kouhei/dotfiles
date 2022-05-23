@@ -12,6 +12,9 @@ if type gh > /dev/null 2>&1; then
   eval "$(gh completion -s zsh)"
 fi
 
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -91,3 +94,5 @@ if [ -e $HOME/.bashAliases ];then
 elif [ -L $HOME/.bashAliases ];then
   source $HOME/.bashAliases
 fi
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
