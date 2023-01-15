@@ -56,6 +56,8 @@ function! Multiple_cursors_before()
   endif
 endfunction
 
+Plug 'sudar/vim-arduino-syntax'
+
 " settings for react
 " https://qiita.com/atsumo/items/cdae74a8920320693696
 Plug 'pangloss/vim-javascript'
