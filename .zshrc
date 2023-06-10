@@ -8,12 +8,11 @@ if type brew &>/dev/null; then
   fpath+=("$BREW_PATH/share/zsh/site-functions")
 fi
 
-if type gh > /dev/null 2>&1; then
-  eval "$(gh completion -s zsh)"
+if type pyenv > /dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
 fi
-
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -96,3 +95,19 @@ elif [ -L $HOME/.bashAliases ];then
 fi
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/kouhei/.pyenv/versions/anaconda3-2022.05/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/kouhei/.pyenv/versions/anaconda3-2022.05/etc/profile.d/conda.sh" ]; then
+        . "/Users/kouhei/.pyenv/versions/anaconda3-2022.05/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/kouhei/.pyenv/versions/anaconda3-2022.05/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
