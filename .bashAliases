@@ -10,29 +10,21 @@ alias la='ls -a'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-if [ $(uname) = "Linux" ];then
-  if which trash-put &>/dev/null; then
-    alias rm='trash-put'
-  fi
-  alias open='xdg-open 2>/dev/null'
-  alias ls='ls --color=auto'
-fi
 if which docker-compose &>/dev/null; then
     alias dc='docker-compose'
   fi
-if type tmux >/dev/null 2>&1; then
-  alias t='tmux'
-  alias tl='t ls'
-  alias ta='t attach -t'
-fi
-if type jupyter >/dev/null 2>&1; then
-  alias jnote='jupyter notebook'
-fi
 if type python >/dev/null 2>&1; then
     alias py='python'
 fi
 if type ipython >/dev/null 2>&1; then
   alias ipy="ipython"
+fi
+if type bpython >/dev/null 2>&1; then
+    alias bpy='bpython'
+fi
+if type jupyter >/dev/null 2>&1; then
+    alias j='jupyter'
+    alias nb='j notebook'
 fi
 if type git >/dev/null 2>&1; then
   alias g='git'
@@ -40,17 +32,7 @@ if type git >/dev/null 2>&1; then
   alias gd='git diff'
   alias ga='git add'
 fi
-if type bpython >/dev/null 2>&1; then
-    alias bpy='bpython'
-fi
-if type apt-get >/dev/null 2>&1; then
-    alias a='apt-get'
-    alias au='sudo apt-get update && sudo apt-get upgrade -y'
-fi
-if type jupyter >/dev/null 2>&1; then
-    alias j='jupyter'
-    alias nb='j notebook'
-fi
+
 
 function notify-github-actions-ci-finish() {
   gh run watch -i10 && osascript -e 'display notification "run is done!" with title "Terminal"'
