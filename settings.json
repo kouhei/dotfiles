@@ -1,0 +1,118 @@
+{
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "'PlemolJP', monospace",
+  "editor.fontSize": 12,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+  "editor.guides.bracketPairs": "active",
+  "editor.minimap.enabled": false,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.rulers": [
+    80
+  ],
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "on",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+},
+  "files.trimTrailingWhitespace": true,
+  "git.autofetch": true,
+  "githubPullRequests.createOnPublishBranch": "never",
+  "javascript.validate.enable": false,
+  // 引数の名前が表示されます。
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  // importが入力補完される
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "markdown.preview.fontSize": 12,
+  "prettier.requireConfig": true,
+  "editor.experimental.stickyScroll.enabled": true,
+  // "terminal.integrated.env.osx": {
+  //   "FIG_NEW_SESSION": "1"
+  // },
+  // ファイルツリーにインデントのガイド線を表示する / インデントのサイズを変更する
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.tree.indent": 16,
+  "terminal.integrated.fontSize": 12,
+  "todo-tree.general.tags": [
+    "TODO",
+    "FIX"
+  ],
+  "todo-tree.highlights.enabled": true,
+  "todo-tree.tags": [
+    "TODO",
+    "FIX"
+  ],
+  "todo-tree.tree.showScanModeButton": false,
+  "vim.hlsearch": true,
+  // 検索時には大文字小文字を無視
+  "vim.ignorecase": true,
+  // 入力中でもマッチしたものを表示してくれる
+  "vim.incsearch": true,
+  // 行の最初と最後でのカーソル移動時、行送りできるようにする
+  "vim.whichwrap": "h,l,<,>,[,],b,s",
+  "vim.normalModeKeyBindingsNonRecursive":[
+    // Escキーで検索のハイライトを消す
+    {
+      "before": ["<Esc>"],
+      "commands": [":nohl"]
+    },
+    // インデント
+    // ">>"を">"にしている
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    // "<<"を"<"にしている
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  "vim.insertModeKeyBindings": [
+    {
+      "after": [
+        "<ESC>"
+      ],
+      "before": [
+        "j",
+        "j"
+      ]
+    },
+    {
+      "after": [
+        "<ESC>"
+      ],
+      "before": [
+        "h",
+        "h"
+      ]
+    },
+    {
+      "after": [
+        "<ESC>"
+      ],
+      "before": [
+        "k",
+        "k"
+      ]
+    }
+  ],
+  "vim.useSystemClipboard": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.editorAssociations": {
+    "*.data": "default"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none"
+}

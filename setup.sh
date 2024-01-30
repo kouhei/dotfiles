@@ -64,6 +64,18 @@ killall Finder
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+
+## 手作業 (qiitaか何かにまとめておきたい)
+# vscodeの設定ファイルをコピペ
+# git のユーザー名とかSSH鍵の設定とか
+# git config --global user.name "Your Name"
+# git config --global user.email "your.email@bmail.com"
+# https://qiita.com/39pon/items/225cd10a91f09705d788
+# Google Meetなどのスクリーン共有機能を使う場合、あらかじめ設定をしておく必要があります。Macの設定の「Security & Privacy」中の「Screen Recording」から、「Google Chrome」をチェック。いざ会議中に設定しようとしても遅いのであらかじめやっておくのがおすすめです。(https://qiita.com/sh0nk/items/f88baa508746f06f30ed)
+# postmanの設定
+# メーラーなどのログイン?
+# chrome拡張機能
+
 echo "setup done!"
 
 echo "reopen terminal & open vim and ':PlugInstall'"
