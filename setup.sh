@@ -36,13 +36,30 @@ if [ $UNAME = 'Darwin' ]; then
   brew bundle
 fi
 
-echo "setup"
+echo "re-apply zshrc"
 source $HOME/.zshrc
-git config --global ghq.root '~/src'
-defaults write com.apple.screencapture name "SS" # スクリーンショットの先頭の文字をSSに
 
+echo "setup"
+git config --global ghq.root '~/src'
+
+# https://macos-defaults.com/
+echo "modify settings"
+defaults write com.apple.screencapture name "SS" # スクリーンショットの先頭の文字をSSに
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false # 拡張子変更の警告なし
+defaults write -g AppleShowAllExtensions -bool true # 拡張子表示
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # ネットワークディスク上に.DS_Storeを作らない
+defaults write com.apple.dock "show-recents" -bool "false"
+defaults write com.apple.finder "ShowPathbar" -bool "true"
+killall Dock
+killall Finder
+
+echo "modify dock"
+./dock.sh
+
+echo "Install node..."
 volta install node@latest
 
+echo "change default app"
 # デフォルトで開くアプリを変更
 # duti -s org.videolan.vlc .mp3 all
 # duti -s org.videolan.vlc .mp4 all
@@ -58,7 +75,6 @@ duti -s com.microsoft.VSCode .html all
 duti -s com.microsoft.VSCode .css all
 duti -s com.microsoft.VSCode .xml all
 duti -s com.microsoft.VSCode .json all
-
 killall Finder
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -67,6 +83,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 ## 手作業 (qiitaか何かにまとめておきたい)
 # vscodeの設定ファイルをコピペ
+# git リポジトリのクローン
+# googleカレンダーとかをネイティブアプリ化
 # git のユーザー名とかSSH鍵の設定とか
 # git config --global user.name "Your Name"
 # git config --global user.email "your.email@bmail.com"
@@ -77,5 +95,4 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # chrome拡張機能
 
 echo "setup done!"
-
 echo "reopen terminal & open vim and ':PlugInstall'"
