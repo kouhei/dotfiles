@@ -32,6 +32,9 @@ if type git >/dev/null 2>&1; then
   alias gd='git diff'
   alias ga='git add'
 fi
+if type fd >/dev/null 2>&1; then
+  alias find='fd'
+fi
 
 
 function notify-github-actions-ci-finish() {
@@ -64,6 +67,15 @@ function peco-cdr() {
 zle -N peco-cdr
 bindkey '^u' peco-cdr
 
+# C-rをpecoで選べるようにするやつ。
+function peco-select-history() {
+    BUFFER=$(fc -l -r -n 1 | peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
 # ブランチを簡単切り替え。gcoで実行できる
 alias -g gco='git checkout $(git branch -a | peco --prompt "GIT BRANCH>" | head -n 1 | sed -e "s/^\*\s*//g")'
 
@@ -73,9 +85,8 @@ if [ $UNAME = 'Darwin' ];then
   alias f="open -a Finder ./"
   alias b="brew"
   #alias f='open .'
-  alias brewu='brew update && brew upgrade'
-  alias bu='brewu'
-  alias bu='brewu && brew cleanup'
+  alias brewu='brew update && brew upgrade && mas upgrade'
+  alias bu='brewu && brew cleanup && mas upgrade'
   alias rm='trash'
   alias jnote='jupyter notebook'
 fi
