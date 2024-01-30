@@ -30,11 +30,10 @@ if [ $UNAME = 'Darwin' ]; then
   else
     echo "Install HomeBrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    brew tap homebrew/cask-drivers
+    # TODO brew bundleにvscodeとかmasコマンド使うので先にtapとかvscodeのインストールとか必要かも
   fi
   echo "install packages"
-  ./brewEssentialsInstall.sh
-  ./appStore.sh
+  brew bundle
 fi
 
 echo "setup"
