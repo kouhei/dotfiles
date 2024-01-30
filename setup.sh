@@ -43,12 +43,16 @@ echo "setup"
 git config --global ghq.root '~/src'
 
 # https://macos-defaults.com/
+echo "backup defaults to defaults-backup"
+defaults read > defaults-backup
 echo "modify settings"
 defaults write com.apple.screencapture name "SS" # スクリーンショットの先頭の文字をSSに
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false # 拡張子変更の警告なし
 defaults write -g AppleShowAllExtensions -bool true # 拡張子表示
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # ネットワークディスク上に.DS_Storeを作らない
 defaults write com.apple.dock "show-recents" -bool "false"
+defaults write com.apple.dock "tilesize" -int 33
+defaults write com.apple.dock "largesize" -int 66
 defaults write com.apple.finder "ShowPathbar" -bool "true"
 killall Dock
 killall Finder
@@ -80,6 +84,12 @@ killall Finder
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# TODO:
+# launchpadのグループ化制御できる？
+# 設定の値いじれる？(キーボードとかマウスとかネットワーク、コントロールセンター,おやすみモード)
+
+# direnv 使うと便利そう (https://zenn.dev/nakaatsu/articles/7133e16a0f787c#direnv)
+# zpreztoまた使ってみる？
 
 ## 手作業 (qiitaか何かにまとめておきたい)
 # vscodeの設定ファイルをコピペ
