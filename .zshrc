@@ -2,10 +2,10 @@ echo "zshrc"
 BREW_PATH=$(brew --prefix)
 
 if type brew &>/dev/null; then
-  FPATH=$BREW_PATH/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit
+  # FPATH=$BREW_PATH/share/zsh-completions:$FPATH
   fpath+=("$BREW_PATH/share/zsh/site-functions")
+  autoload -Uz compinit && compinit
+  autoload -U +X bashcompinit && bashcompinit
 fi
 
 if type pyenv > /dev/null 2>&1; then
@@ -25,6 +25,8 @@ prompt pure
 # 補完機能を有効にする
 autoload -U compinit
 compinit -u
+setopt auto_param_slash       # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt mark_dirs              # ファイル名の展開でディレクトリにマッチした場合 末尾に / を付加
 setopt auto_list         # 補完候補を一覧で表示する(d)
 setopt auto_menu         # 補完キー連打で補完候補を順に表示する(d)
 setopt correct           # コマンドのスペルを訂正する
@@ -35,8 +37,8 @@ setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 # https://gihyo.jp/dev/serial/01/zsh-book/0005
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z} r:|[-_.]=**' '+m:{A-Z}={a-z}'
 zstyle ':completion:*' ignore-parents parent pwd .. # ../ の後は今いるディレクトリを補完しない
-# 補完候補に色を付ける
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} # 補完候補に色を付ける
+zstyle ':completion:*:default' menu select=2 # Tabで選択できるように
 
 # 履歴
 HISTTIMEFORMAT='%F %T '     # 履歴に実行日時も追加
@@ -45,6 +47,7 @@ setopt HIST_IGNORE_ALL_DUPS # 履歴中の重複行をファイル記録前に�
 setopt hist_ignore_space    # コマンドがスペースで始まる場合、コマンド履歴に追加しない
 setopt HIST_FIND_NO_DUPS    # 履歴検索中、(連続してなくとも)重複を飛ばす
 setopt hist_reduce_blanks   # ヒストリに保存するときに余分なスペースを削除する
+setopt share_history        # 他のターミナルとヒストリーを共有
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000

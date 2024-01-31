@@ -36,62 +36,95 @@ if [ $UNAME = 'Darwin' ]; then
   brew bundle
 fi
 
-echo "re-apply zshrc"
-source $HOME/.zshrc
+# echo "re-apply zshrc"
+# source $HOME/.zshrc
 
-echo "setup"
-git config --global ghq.root '~/src'
+echo "start setup"
 
-# https://macos-defaults.com/
-echo "backup defaults to defaults-backup"
-defaults read > defaults-backup
-echo "modify settings"
-defaults write com.apple.screencapture name "SS" # スクリーンショットの先頭の文字をSSに
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false # 拡張子変更の警告なし
-defaults write -g AppleShowAllExtensions -bool true # 拡張子表示
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # ネットワークディスク上に.DS_Storeを作らない
-defaults write com.apple.dock "show-recents" -bool "false"
-defaults write com.apple.dock "tilesize" -int 33
-defaults write com.apple.dock "largesize" -int 66
-defaults write com.apple.finder "ShowPathbar" -bool "true"
-killall Dock
-killall Finder
+function setup {
+  git config --global ghq.root '~/src'
 
-echo "modify dock"
-./dock.sh
+  # ln -s $script_dir/dotfiles/.macup.cfg $HOME/.macup.cfg
 
-echo "Install node..."
-volta install node@latest
+  # https://macos-defaults.com/
+  echo "backup defaults to defaults-backup"
+  defaults read > defaults-backup
+  echo "modify settings"
+  defaults write com.apple.screencapture name "SS" # スクリーンショットの先頭の文字をSSに
+  defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false # 拡張子変更の警告なし
+  defaults write -g AppleShowAllExtensions -bool true # 拡張子表示
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # ネットワークディスク上に.DS_Storeを作らない
+  defaults write com.apple.dock "show-recents" -bool "false"
+  defaults write com.apple.dock "tilesize" -int 33
+  defaults write com.apple.dock "largesize" -int 66
+  defaults write com.apple.finder "ShowPathbar" -bool "true"
+  killall Dock
+  killall Finder
 
-echo "change default app"
-# デフォルトで開くアプリを変更
-# duti -s org.videolan.vlc .mp3 all
-# duti -s org.videolan.vlc .mp4 all
-# duti -s abnerworks.Typora .md all
-duti -s com.microsoft.VSCode .txt all
-duti -s com.microsoft.VSCode .md all
-duti -s com.microsoft.VSCode .js all
-duti -s com.microsoft.VSCode .ts all
-duti -s com.microsoft.VSCode .jsx all
-duti -s com.microsoft.VSCode .tsx all
-duti -s com.microsoft.VSCode .svg all
-duti -s com.microsoft.VSCode .html all
-duti -s com.microsoft.VSCode .css all
-duti -s com.microsoft.VSCode .xml all
-duti -s com.microsoft.VSCode .json all
-killall Finder
+  echo "modify dock"
+  ./dock.sh
 
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  echo "Install node..."
+  volta install node@latest
+
+  echo "change default app"
+  # デフォルトで開くアプリを変更
+  # duti -s org.videolan.vlc .mp3 all
+  # duti -s org.videolan.vlc .mp4 all
+  # duti -s abnerworks.Typora .md all
+  duti -s com.microsoft.VSCode .txt all
+  duti -s com.microsoft.VSCode .md all
+  duti -s com.microsoft.VSCode .js all
+  duti -s com.microsoft.VSCode .ts all
+  duti -s com.microsoft.VSCode .jsx all
+  duti -s com.microsoft.VSCode .tsx all
+  duti -s com.microsoft.VSCode .svg all
+  duti -s com.microsoft.VSCode .html all
+  duti -s com.microsoft.VSCode .css all
+  duti -s com.microsoft.VSCode .xml all
+  duti -s com.microsoft.VSCode .json all
+  killall Finder
+
+  echo "setup vim"
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+
+function ask_yes_no {
+  while true; do
+    echo -n "$* [y/n]: "
+    read ANS
+    case $ANS in
+      [Yy]*)
+        return 0
+        ;;
+      [Nn]*)
+        return 1
+        ;;
+      *)
+        echo "yまたはnを入力してください"
+        ;;
+    esac
+  done
+}
+
+if ask_yes_no "appStoreにログインした? (Yy/Nn)"; then
+  # ここに「Yes」の時の処理を書く
+  setup
+  echo "setup done!"
+  echo "reopen terminal & open vim and ':PlugInstall' & 手作業！"
+else
+  # ここに「No」の時の処理を書く
+  ask_yes_no
+fi
 
 # TODO:
-# dockのdownloadで中身を表示するようにしたい
 # launchpadのグループ化制御できる？
 # 設定の値いじれる？(キーボードとかマウスとかネットワーク、コントロールセンター,おやすみモード)
 
 # direnv 使うと便利そう (https://zenn.dev/nakaatsu/articles/7133e16a0f787c#direnv)
 # zpreztoまた使ってみる？
-# macup便利そう https://qiita.com/saboyutaka/items/b4aaa1f5fcd0ea148b2a
+# mackup便利そう https://qiita.com/saboyutaka/items/b4aaa1f5fcd0ea148b2a
 # caffeinate便利かも https://qiita.com/hakuro/items/c2302f1ad83bf3424a1a
 
 ## 手作業 (qiitaか何かにまとめておきたい)
@@ -116,8 +149,3 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 ## WhatFont
 ## CSSViewer
 ## redux
-
-
-
-echo "setup done!"
-echo "reopen terminal & open vim and ':PlugInstall'"

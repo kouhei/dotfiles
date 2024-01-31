@@ -1,21 +1,20 @@
 echo "delete dock list"
 # dockから全て消す
 text=$(dockutil --list)
-echo $text
+# echo $text
 
-while IFS= read -r line; do
-    $tmp=echo "$line" | grep -o 'file://[^ ]*' | cut -f1 | sed 's/%20/ /g'
-    dockutil -r $tmp
-done <<< "$text"
+# すでにdockにあるものを消す
+echo "reset dock"
+dockutil --no-restart --remove all
 
-echo "add dock list"
+echo "add dock items"
 # dockに追加する
-# メーラー
-dockutil -a --no-restart "file:///Applications/Google Chrome.app/"
-dockutil -a --no-restart "file:///Applications/Slack.app/"
-dockutil -a --no-restart "file:///Applications/Discord.app/"
-dockutil -a --no-restart "file:///Applications/Visual Studio Code.app/"
-dockutil -a --no-restart "file:///Applications/Microsoft To Do.app/"
-dockutil -a --no-restart "file:///Applications/DeepL.app/"
-dockutil -a --no-restart "file:///System/Applications/Utilities/Terminal.app/"
-dockutil -a "file:///Users/kouhei/Downloads/"
+# TODO:メーラーも追加したい
+dockutil -a  "file:///Applications/Google Chrome.app/" --no-restart
+dockutil -a "file:///Applications/Slack.app/" --no-restart
+dockutil -a "file:///Applications/Discord.app/" --no-restart
+dockutil -a "file:///Applications/Visual Studio Code.app/" --no-restart
+dockutil -a "file:///Applications/Microsoft To Do.app/" --no-restart
+dockutil -a "file:///Applications/DeepL.app/" --no-restart
+dockutil -a "file:///System/Applications/Utilities/Terminal.app/" --no-restart
+dockutil -a "file:///Users/kouhei/Downloads/" --display stack --view grid -s others
