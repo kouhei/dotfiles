@@ -98,3 +98,5 @@ elif [ -L $HOME/.bashAliases ];then
 fi
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+export GPG_TTY=$(tty) # これがないとGPGコミット署名でcommitできなかった
