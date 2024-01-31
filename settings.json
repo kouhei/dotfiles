@@ -5,7 +5,7 @@
     "source.organizeImports": "never"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "'PlemolJP', monospace",
+  "editor.fontFamily": "\"Source Han Code JP\",'PlemolJP35 Console NF', 'PlemolJP Console NF', monospace",
   "editor.fontSize": 12,
   "editor.formatOnSave": true,
   "editor.formatOnType": false,

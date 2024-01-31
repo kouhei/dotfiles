@@ -91,6 +91,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # direnv 使うと便利そう (https://zenn.dev/nakaatsu/articles/7133e16a0f787c#direnv)
 # zpreztoまた使ってみる？
+# macup便利そう https://qiita.com/saboyutaka/items/b4aaa1f5fcd0ea148b2a
+# caffeinate便利かも https://qiita.com/hakuro/items/c2302f1ad83bf3424a1a
 
 ## 手作業 (qiitaか何かにまとめておきたい)
 # vscodeの設定ファイルをコピペ
@@ -104,6 +106,18 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # postmanの設定
 # メーラーなどのログイン?
 # chrome拡張機能
+## Adblock Plus / uBlock Origin
+## Google 翻訳
+## uBlacklist
+## User-Agent Switcher for Chrome
+## Video Speed Controller
+## Wappalyzer
+## Absolute Enable Right Click & Copy
+## WhatFont
+## CSSViewer
+## redux
+
+
 
 echo "setup done!"
 echo "reopen terminal & open vim and ':PlugInstall'"
