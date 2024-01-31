@@ -124,10 +124,12 @@ fi
 
 # direnv 使うと便利そう (https://zenn.dev/nakaatsu/articles/7133e16a0f787c#direnv)
 # zpreztoまた使ってみる？
-# mackup便利そう https://qiita.com/saboyutaka/items/b4aaa1f5fcd0ea148b2a
+# mackup便利そう https://tech.nomunomu0504.dev/entry/2020/01/27/083000
+## dotfilesを別の場所で管理してシンボリックリンクを貼ってる場合は面倒なようで使わないことにした
 # caffeinate便利かも https://qiita.com/hakuro/items/c2302f1ad83bf3424a1a
 
 ## 手作業 (qiitaか何かにまとめておきたい)
+# ソフトウェアアップデート
 # vscodeの設定ファイルをコピペ
 # git リポジトリのクローン
 # googleカレンダーとかをネイティブアプリ化
