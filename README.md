@@ -12,6 +12,7 @@
 - ソフトウェアアップデート
 - vscodeの設定ファイルをコピペ
 - git のユーザー名とかSSH鍵の設定とか
+  - https://qiita.com/ucan-lab/items/aadbedcacbc2ac86a2b3#git%E5%88%9D%E6%9C%9F%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86%E5%BF%85%E9%A0%88
   - git config --global user.name "Your Name"
   - git config --global user.email "your.email@bmail.com"
 - メーラーや入れたアプリの設定 TODO: やったことまとめておく
