@@ -85,6 +85,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # TODO:
+# dockのdownloadで中身を表示するようにしたい
 # launchpadのグループ化制御できる？
 # 設定の値いじれる？(キーボードとかマウスとかネットワーク、コントロールセンター,おやすみモード)
 
