@@ -108,7 +108,7 @@ function ask_yes_no {
   done
 }
 
-if ask_yes_no "appStoreにログインした? (Yy/Nn)"; then
+if ask_yes_no "appStoreにログインした & vscodeのcodeコマンド使える? (Yy/Nn)"; then
   # ここに「Yes」の時の処理を書く
   setup
   echo "setup done!"
@@ -127,27 +127,3 @@ fi
 # mackup便利そう https://tech.nomunomu0504.dev/entry/2020/01/27/083000
 ## dotfilesを別の場所で管理してシンボリックリンクを貼ってる場合は面倒なようで使わないことにした
 # caffeinate便利かも https://qiita.com/hakuro/items/c2302f1ad83bf3424a1a
-
-## 手作業 (qiitaか何かにまとめておきたい)
-# ソフトウェアアップデート
-# vscodeの設定ファイルをコピペ
-# git リポジトリのクローン
-# googleカレンダーとかをネイティブアプリ化
-# git のユーザー名とかSSH鍵の設定とか
-# git config --global user.name "Your Name"
-# git config --global user.email "your.email@bmail.com"
-# https://qiita.com/39pon/items/225cd10a91f09705d788
-# Google Meetなどのスクリーン共有機能を使う場合、あらかじめ設定をしておく必要があります。Macの設定の「Security & Privacy」中の「Screen Recording」から、「Google Chrome」をチェック。いざ会議中に設定しようとしても遅いのであらかじめやっておくのがおすすめです。(https://qiita.com/sh0nk/items/f88baa508746f06f30ed)
-# postmanの設定
-# メーラーなどのログイン?
-# chrome拡張機能
-## Adblock Plus / uBlock Origin
-## Google 翻訳
-## uBlacklist
-## User-Agent Switcher for Chrome
-## Video Speed Controller
-## Wappalyzer
-## Absolute Enable Right Click & Copy
-## WhatFont
-## CSSViewer
-## redux
