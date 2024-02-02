@@ -64,8 +64,8 @@ function setup {
   echo "modify dock"
   ./dock.sh
 
-  echo "Install node..."
-  volta install node@latest
+  echo "Install node(latest LTS) ..."
+  volta install node
 
   echo "change default app"
   # デフォルトで開くアプリを変更
